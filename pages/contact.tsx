@@ -72,7 +72,7 @@ const Contact: NextPage<Props> = ({ data }) => {
             </label>
             <label className="block">
               <span className="mb-1">{s.message}</span>
-              <textarea rows="5"
+              <textarea rows={5}
                 className="block w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-teal-400 bg-coolGray-800"></textarea>
             </label>
 
