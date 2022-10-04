@@ -2,6 +2,7 @@ import type { GetStaticProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useMemo } from 'react'
 import Header from '../components/Header'
+import JoinNewsLetter from '../components/JoinNewsLetter'
 import Layout from '../components/Layout'
 
 interface Props {
@@ -86,6 +87,8 @@ const Contact: NextPage<Props> = ({ data }) => {
           </form>
         </div>
       </section>
+      
+      <JoinNewsLetter locale={locale as string} />
 
     </Layout>
   )
