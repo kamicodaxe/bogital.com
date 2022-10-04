@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import { useRouter } from "next/router"
 import { useMemo } from "react"
 import Header from "../../components/Header"
@@ -19,6 +20,24 @@ const Blog: React.FC<Props> = ({ }) => {
                 <div className="container p-6 mx-auto space-y-8">
                     <div className="space-y-2 text-center">
                         <h2 className="text-3xl font-bold">Partem reprimique an pro</h2>
+                        <p className="font-serif text-sm dark:text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
+                    </div>
+
+                    <div className="space-y-2 text-center">
+                        <motion.img
+                            alt="" className="object-cover w-full h-52 dark:bg-coolGray-500"
+                            src="https://source.unsplash.com/200x200/?techology?1"
+                            layoutId="image"
+                        />
+                        
+                        <p className="font-serif text-sm dark:text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
+                        <p className="font-serif text-sm dark:text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
+                        <p className="font-serif text-sm dark:text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
+                        <p className="font-serif text-sm dark:text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
+                        <p className="font-serif text-sm dark:text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
+                        <p className="font-serif text-sm dark:text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
+                        <p className="font-serif text-sm dark:text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
+                        <p className="font-serif text-sm dark:text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
                         <p className="font-serif text-sm dark:text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
                     </div>
                 </div>

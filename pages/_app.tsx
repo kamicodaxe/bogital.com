@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 // import reportWebVitals from "./reportWebVitals";
+import { AnimateSharedLayout } from "framer-motion"
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = (url: string) => {
@@ -26,7 +27,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }, [router.events])
 
-  return <Component {...pageProps} />
+  return <AnimateSharedLayout>
+    <Component {...pageProps} />
+  </AnimateSharedLayout>
 }
 
 export default MyApp

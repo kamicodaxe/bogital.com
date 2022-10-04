@@ -8,9 +8,10 @@ interface Props {
     active: string
     locale: string
     className?: string
+    navBarOnly?: boolean
 }
 
-const HomeHeader: React.FC<Props> = ({ active, locale, className, title }) => {
+const HomeHeader: React.FC<Props> = ({ active, locale, className, title, navBarOnly }) => {
     const activeLink = (routeName: string) => {
         // TODO: Use classnames from npm
         if (!active) return 'flex items-center px-4 -mb-1 border-b-2 border-transparent hover:text-primary transition-colors cursor-pointer'
@@ -54,15 +55,18 @@ const HomeHeader: React.FC<Props> = ({ active, locale, className, title }) => {
     return (
         <header className={CONTAINER_CLASS_NAME + (className || '')}>
             <NavBar active={active} locale={locale} />
-            <section className="dark:bg-coolGray-800 dark:text-coolGray-100">
-                <div
-                    className="container mx-auto flex flex-col items-center px-4 py-16 text-center md:py-32 md:px-10 lg:px-32 xl:max-w-3xl">
-                    <h1 className="text-4xl font-bold leading-none sm:text-5xl">
-                        {title}
-                    </h1>
-
-                </div>
-            </section>
+            {
+                !navBarOnly && (
+                    <section className="dark:bg-coolGray-800 dark:text-coolGray-100">
+                        <div
+                            className="container mx-auto flex flex-col items-center px-4 py-16 text-center md:py-32 md:px-10 lg:px-32 xl:max-w-3xl">
+                            <h1 className="text-4xl font-bold leading-none sm:text-5xl">
+                                {title}
+                            </h1>
+                        </div>
+                    </section>
+                )
+            }
 
         </header>
     )

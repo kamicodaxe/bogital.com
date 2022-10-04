@@ -1,5 +1,7 @@
 import Link from "next/link"
 import { useMemo } from "react"
+import { motion } from "framer-motion"
+
 
 interface Props {
     locale: string
@@ -23,8 +25,13 @@ const BlogPreview: React.FC<Props> = ({ locale }) => {
                             <Link key={_item.title} className="flex cursor-pointer" href="/blog/article">
                                 <article className="flex flex-col hover:bg-teal-400 hover:text-white dark:bg-coolGray-900">
                                     <Link rel="" href="/blog/article" aria-label="Te nulla oportere reprimique his dolorum">
-                                        <img alt="" className="object-cover w-full h-52 dark:bg-coolGray-500"
-                                            src={_item.image} />
+                                        <motion.img
+                                            alt="" className="object-cover w-full h-52 dark:bg-coolGray-500"
+                                            src={_item.image}
+                                            layoutId="image"
+                                        />
+                                        {/* <img alt="" className="object-cover w-full h-52 dark:bg-coolGray-500"
+                                            src={_item.image} /> */}
                                     </Link>
                                     <div className="flex flex-col flex-1 p-6">
                                         {/* <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a> */}

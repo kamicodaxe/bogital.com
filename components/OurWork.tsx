@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -30,7 +31,9 @@ const OurWork: React.FC<Props> = ({ locale }) => {
                         customers.map((_customer, i) => (
                             <Link className="flex" href={"/projects/project"} key={_customer.title}>
                                 <div className="flex flex-col cursor-pointer hover:bg-teal-400 hover:text-white">
-                                    <Image src={"https://source.unsplash.com/random/420x21" + i} width={420} height={210} className="object-cover" />
+                                    <motion.figure className="flex" layoutId={"image" + i}>
+                                        <Image src={"https://source.unsplash.com/random/420x21" + i} width={420} height={210} className="object-cover" />
+                                    </motion.figure>
                                     <div className="mt-2 ml-2 mb-8">
                                         <dt className="text-lg font-medium">{_customer.title}</dt>
                                         <dd className="mt-2 text-gray-600">{_customer.desc}</dd>

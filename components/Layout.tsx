@@ -8,13 +8,14 @@ interface Props extends React.PropsWithChildren {
     locale: string
     title: string
     desc: string
+    hideFooter?: boolean
 }
 
 interface Props {
     locale: string
 }
 
-const Layout: React.FC<Props> = ({ children, locale, title, desc }) => {
+const Layout: React.FC<Props> = ({ children, locale, title, desc, hideFooter }) => {
     const isFr = useMemo(() => locale.toLowerCase().includes('fr'), [locale])
     const lang = isFr ? 'fr_FR' : 'en_US'
     const siteName = isFr ? "Bogital - Nous vous accompagnons dans la digitalisation de votre activité." : "Bogital - We build software to make your life easier"
@@ -45,8 +46,8 @@ const Layout: React.FC<Props> = ({ children, locale, title, desc }) => {
             {children}
 
             {/* @ts-ignore */}
-            <Footer locale={locale as string} />
-
+            {!hideFooter && <Footer locale={locale as string} />}
+            
             <Script
                 strategy="afterInteractive"
                 src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
