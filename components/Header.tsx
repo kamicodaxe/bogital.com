@@ -28,7 +28,7 @@ const HomeHeader: React.FC<Props> = ({ active, locale, className, title }) => {
 
     function showMenu() {
         var dropDown = document.querySelector("#drop-down");
-        if (dropDown.classList.contains("hidden")) {
+        if (dropDown && dropDown.classList.contains("hidden")) {
             dropDown.classList.remove("hidden")
             return;
         }
@@ -36,7 +36,7 @@ const HomeHeader: React.FC<Props> = ({ active, locale, className, title }) => {
 
     function hideMenu() {
         var dropDown = document.querySelector("#drop-down");
-        if (!dropDown.classList.contains("hidden")) {
+        if (dropDown && !dropDown.classList.contains("hidden")) {
             dropDown.classList.add("hidden");
             return;
         }

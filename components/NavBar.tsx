@@ -37,7 +37,7 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
 
     function showMenu() {
         var dropDown = document.querySelector("#drop-down");
-        if (dropDown.classList.contains("hidden")) {
+        if (dropDown && dropDown.classList.contains("hidden")) {
             dropDown.classList.remove("hidden")
             return;
         }
@@ -45,7 +45,7 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
 
     function hideMenu() {
         var dropDown = document.querySelector("#drop-down");
-        if (!dropDown.classList.contains("hidden")) {
+        if (dropDown && !dropDown.classList.contains("hidden")) {
             dropDown.classList.add("hidden");
             return;
         }
