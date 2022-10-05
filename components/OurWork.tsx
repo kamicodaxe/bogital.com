@@ -35,7 +35,10 @@ const OurWork: React.FC<Props> = ({ locale }) => {
                                         <Image src={"https://source.unsplash.com/random/420x21" + i} width={420} height={210} className="object-cover" />
                                     </motion.figure>
                                     <div className="mt-2 ml-2 mb-8">
-                                        <dt className="text-lg font-medium">{_customer.title}</dt>
+                                        <motion.dt className="text-lg font-medium" layoutId={"bName" + i}>
+                                            {_customer.title}
+                                        </motion.dt>
+                                        {/* <dt className="text-lg font-medium">{_customer.title}</dt> */}
                                         <dd className="mt-2 text-gray-600">{_customer.desc}</dd>
                                     </div>
                                 </div>
