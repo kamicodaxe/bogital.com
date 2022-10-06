@@ -35,7 +35,7 @@ const HomeHeader: React.FC<Props> = ({ active, locale }) => {
     // </li>
 
     return (
-        <header className="bg-cover dark:bg-coolGray-800 dark:text-coolGray-100  bg-[url(https://source.unsplash.com/UVMPVIRCF5w/1280x)] bg-center">
+        <header className="bg-cover dark:bg-coolGray-800 dark:text-coolGray-100  bg-[url(https://source.unsplash.com/UVMPVIRCF5w/1280x)] bg-center relative">
             <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)]"></div>
             <NavBar active={active} locale={locale} />
 
