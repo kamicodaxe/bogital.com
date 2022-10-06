@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { useMemo, useState } from "react"
 import NavBar from "./NavBar"
+import Typical from "./Typical"
 
 
 interface Props {
@@ -34,19 +35,27 @@ const HomeHeader: React.FC<Props> = ({ active, locale }) => {
     // </li>
 
     return (
-        <header className="p-4 bg-cover dark:bg-coolGray-800 dark:text-coolGray-100  bg-[url(https://source.unsplash.com/UVMPVIRCF5w/1280x)] bg-center">
+        <header className="bg-cover dark:bg-coolGray-800 dark:text-coolGray-100  bg-[url(https://source.unsplash.com/UVMPVIRCF5w/1280x)] bg-center">
+            <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)]"></div>
             <NavBar active={active} locale={locale} />
 
             <section className="dark:bg-coolGray-800 dark:text-coolGray-100 py-16">
                 <div
-                    className="container mx-auto flex flex-col items-center px-4 py-16 text-center md:py-32 md:px-10 lg:px-32 xl:max-w-3xl">
-                    <h1 className="text-white text-4xl font-bold leading-none sm:text-5xl">We built
-                        <span className="dark:text-teal-400"> <span> </span>Websites</span>
+                    className="container mx-auto flex flex-col items-center px-4 py-16 text-center md:py-32 md:px-10 lg:px-32 xl:max-w-6xl">
+                    <h1 className="text-white text-4xl font-bold leading-none sm:text-5xl z-10">We build
+                        <span className="dark:text-teal-400">
+                            <span> </span>
+                            <Typical
+                                steps={['Websites.', 1500, 'Mobile Applications.', 1500, 'the world.', 1500, 'it for you!', 1500]}
+                                loop={Infinity}
+                                wrapper="span"
+                            />
+                        </span>
                     </h1>
-                    <p className="px-8 mt-8 mb-12 text-white text-lg bg-gray-700">
+                    <p className="px-8 mt-8 mb-12 text-white text-lg z-10">
                         Nous vous accompagnons dans la digitalisation de votre activité.
                     </p>
-                    <div className="flex flex-wrap justify-center">
+                    <div className="flex flex-wrap justify-center z-10">
                         <button
                             className="px-8 py-3 m-2 text-lg font-semibold rounded text-white hover:bg-teal-300 dark:bg-teal-400 dark:text-coolGray-900">
                             Demandez un devis
@@ -58,6 +67,7 @@ const HomeHeader: React.FC<Props> = ({ active, locale }) => {
                     </div>
                 </div>
             </section>
+
 
         </header>
     )

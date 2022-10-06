@@ -50,3 +50,15 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(44, 167, 154);
 }
+
+/* TYPICAL: https://github.com/catalinmiron/react-typical/blob/master/src/styles.css */
+.typical-wrapper::after {
+  content: "|";
+  animation: blink 1s infinite step-start;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
