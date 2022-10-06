@@ -46,7 +46,7 @@ const HomeHeader: React.FC<Props> = ({ active, locale }) => {
                         <span className="dark:text-teal-400">
                             <span> </span>
                             <Typical
-                                steps={['Websites.', 1500, 'Mobile Applications.', 1500, 'the world.', 1500, 'it for you!', 1500]}
+                                steps={['Websites.', 1500, 'Mobile Applications.', 1500, 'the world.', 1500, 'it for you!', 2500]}
                                 loop={Infinity}
                                 wrapper="span"
                             />
