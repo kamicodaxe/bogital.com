@@ -10,7 +10,7 @@ const CTA: React.FC<{}> = ({ }) => {
 
                 <div className="py-4"></div>
                 <button type="button"
-                    className="px-8 py-3 m-2 text-lg border rounded text-white hover:bg-teal-400 hover:border-teal-400 dark:text-coolGray-50 dark:border-coolGray-700">
+                    className="px-8 py-3 m-2 text-lg border rounded text-white bg-teal-400 border-teal-400 hover:bg-teal-500 hover:border-teal-500  dark:text-coolGray-50 dark:border-coolGray-700">
                     Demandez un devis
                 </button>
             </div>
