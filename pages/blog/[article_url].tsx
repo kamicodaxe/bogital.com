@@ -28,7 +28,7 @@ const Blog: React.FC<Props> = ({ }) => {
 
                         <motion.img
                             alt="Article main image" className="h-52 mx-auto"
-                            src="https://source.unsplash.com/200x200/?techology?1"
+                            src="https://source.unsplash.com/600x300/?techology?1"
                             layoutId="image"
                         />
 

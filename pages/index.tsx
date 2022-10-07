@@ -23,7 +23,7 @@ const Home: NextPage<Props> = ({ data }) => {
   return (
     <Layout locale={locale as string} title={title} desc={desc}>
       <HomeHeader locale={locale as string} active="home" />
-      <OurWork locale={locale as string} />
+      <OurWork isPreview locale={locale as string} />
       <Partners />
       <CTA />
       <Services />
