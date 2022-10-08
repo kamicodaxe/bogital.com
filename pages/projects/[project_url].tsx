@@ -18,9 +18,9 @@ const Project: React.FC<Props> = ({ }) => {
     return (
         <Layout locale={locale as string} title={s.title} desc={s.desc} hideFooter>
 
-            <section className="container h-screen flex flex-col md:flex-row sm:mx-auto text-gray-800 relative">
+            <section className="container h-screen flex flex-col lg:flex-row mx-auto text-gray-800">
 
-                <article className="flex flex-1 flex-col  bg-coolGray-900">
+                <article className="flex flex-col flex-1 bg-coolGray-900">
 
                     <span aria-label="Te nulla oportere reprimique his dolorum">
                         <motion.img
@@ -55,7 +55,8 @@ const Project: React.FC<Props> = ({ }) => {
 
                 </article>
 
-                <div className="flex flex-1 flex-col space-y-4 h-full overflow-y-scroll px-4 sm:pr-12">
+                <div className="flex flex-col flex-1 space-y-4 lg:overflow-y-scroll px-4 sm:pr-12">
+
                     <h2 className="text-3xl font-bold text-center">Partem reprimique an pro</h2>
                     <p className="font-serif text-sm text-center">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
 
@@ -71,11 +72,19 @@ const Project: React.FC<Props> = ({ }) => {
                         Fusce ac egestas diam, tristique lacinia purus. Ut ut iaculis nibh. Nulla commodo ante a ipsum accumsan, eu ornare erat rutrum. Pellentesque pellentesque faucibus nunc id pharetra. Vivamus efficitur sit amet turpis et consectetur. Maecenas erat felis, egestas egestas blandit vitae, viverra sed sem. Maecenas viverra mauris nec urna lacinia, a aliquam arcu elementum. Curabitur nec pretium eros. Pellentesque vehicula sollicitudin enim, ac rhoncus lacus ultrices tempor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque aliquet, orci vel ultricies convallis, dolor ligula euismod eros, quis varius felis lacus ac sapien. Fusce efficitur aliquet ligula, sed commodo felis mattis nec. In hac habitasse platea dictumst. In vel lectus sed lectus convallis tristique et id arcu. Donec nec ante suscipit, molestie urna sed, bibendum ex.
                     </p>
 
+                    <p className="text-md text-gray-700">
+                        Fusce ac egestas diam, tristique lacinia purus. Ut ut iaculis nibh. Nulla commodo ante a ipsum accumsan, eu ornare erat rutrum. Pellentesque pellentesque faucibus nunc id pharetra. Vivamus efficitur sit amet turpis et consectetur. Maecenas erat felis, egestas egestas blandit vitae, viverra sed sem. Maecenas viverra mauris nec urna lacinia, a aliquam arcu elementum. Curabitur nec pretium eros. Pellentesque vehicula sollicitudin enim, ac rhoncus lacus ultrices tempor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque aliquet, orci vel ultricies convallis, dolor ligula euismod eros, quis varius felis lacus ac sapien. Fusce efficitur aliquet ligula, sed commodo felis mattis nec. In hac habitasse platea dictumst. In vel lectus sed lectus convallis tristique et id arcu. Donec nec ante suscipit, molestie urna sed, bibendum ex.
+                    </p>
+
+                    <p className="text-md text-gray-700">
+                        Fusce ac egestas diam, tristique lacinia purus. Ut ut iaculis nibh. Nulla commodo ante a ipsum accumsan, eu ornare erat rutrum. Pellentesque pellentesque faucibus nunc id pharetra. Vivamus efficitur sit amet turpis et consectetur. Maecenas erat felis, egestas egestas blandit vitae, viverra sed sem. Maecenas viverra mauris nec urna lacinia, a aliquam arcu elementum. Curabitur nec pretium eros. Pellentesque vehicula sollicitudin enim, ac rhoncus lacus ultrices tempor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque aliquet, orci vel ultricies convallis, dolor ligula euismod eros, quis varius felis lacus ac sapien. Fusce efficitur aliquet ligula, sed commodo felis mattis nec. In hac habitasse platea dictumst. In vel lectus sed lectus convallis tristique et id arcu. Donec nec ante suscipit, molestie urna sed, bibendum ex.
+                    </p>
+
                 </div>
 
             </section>
 
-            <button onClick={back} className="absolute top-4 right-2">
+            <button onClick={back} className="fixed top-4 right-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 lg:w-12 lg:h-12 cursor-pointer text-teal-400">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
