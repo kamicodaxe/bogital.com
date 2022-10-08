@@ -36,15 +36,15 @@ const strings = {
         items: [
             {
                 title: "How much will it cost me?",
-                body: "The cost depends on many factors. These factors may include; the number of pages, technologies used in the backend, hosting, private emails, design complexity, client skills etc...Write to us directly from our rapid contact form or call us(696835158) directly."
+                body: "The cost depends on many factors. These factors may include: features, technologies used in the backend, hosting, private emails, design complexity, client skills etc... Contact us directly for more information."
             },
             {
                 title: "What are the payment terms?",
-                body: "We expect our clients to buy their domain names and email plus 20 000 FCFA before we start designing. You will pay half of the amount remaining when the web design will be validated.Then complete the payment after project completion."
+                body: "We expect our clients to deposit an upfront payment of 40 to 60% of the total amount allocated before project start. 20% of the amount is invoiced when the project is 80% completed, the rest is paid after the project is deployed."
             },
             {
                 title: "What if I don't love your work?",
-                body: "At Bogital, a project is completed only when the client is satisfied. If you don't love our web design prototype, we will work with you to improve the design until satisfaction."
+                body: "At Bogital, a project is completed only when the client is satisfied. Project prototyping is done at an early stage of the project to make you have a clear picture of the direction the project is taking. At this stage, we will work with you until satisfaction."
             },
             {
                 title: "How to update my website?",
@@ -56,15 +56,15 @@ const strings = {
         items: [
             {
                 title: "How much will it cost me?",
-                body: "The cost depends on many factors. These factors may include; the number of pages, technologies used in the backend, hosting, private emails, design complexity, client skills etc...Write to us directly from our rapid contact form or call us(696835158) directly."
+                body: "The cost depends on many factors. These factors may include: features, technologies used in the backend, hosting, private emails, design complexity, client skills etc... Contact us directly for more information."
             },
             {
                 title: "What are the payment terms?",
-                body: "We expect our clients to buy their domain names and email plus 20 000 FCFA before we start designing. You will pay half of the amount remaining when the web design will be validated.Then complete the payment after project completion."
+                body: "We expect our clients to deposit an upfront payment of 40 to 60% of the total amount allocated before project start. 20% of the amount is invoiced when the project is 80% completed, the rest is paid after the project is deployed."
             },
             {
                 title: "What if I don't love your work?",
-                body: "At Bogital, a project is completed only when the client is satisfied. If you don't love our web design prototype, we will work with you to improve the design until satisfaction."
+                body: "At Bogital, a project is completed only when the client is satisfied. Project prototyping is done at an early stage of the project to make you have a clear picture of the direction the project is taking. At this stage, we will work with you until satisfaction."
             },
             {
                 title: "How to update my website?",
