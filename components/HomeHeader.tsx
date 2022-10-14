@@ -35,15 +35,15 @@ const HomeHeader: React.FC<Props> = ({ active, locale }) => {
     // </li>
 
     return (
-        <header className="bg-cover dark:bg-coolGray-800 dark:text-coolGray-100  bg-[url(https://source.unsplash.com/UVMPVIRCF5w/1280x)] bg-center relative">
+        <header className="bg-cover bg-coolGray-800 text-coolGray-100  bg-[url(https://source.unsplash.com/UVMPVIRCF5w/1280x)] bg-center relative">
             <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)]"></div>
             <NavBar active={active} locale={locale} />
 
-            <section className="dark:bg-coolGray-800 dark:text-coolGray-100 py-16">
+            <section className="bg-coolGray-800 text-coolGray-100 py-16">
                 <div
                     className="container mx-auto flex flex-col items-center px-4 py-16 text-center md:py-32 md:px-10 lg:px-32 xl:max-w-6xl">
                     <h1 className="text-white text-4xl font-bold leading-none sm:text-5xl z-10">We build
-                        <span className="dark:text-teal-400">
+                        <span className="text-teal-400">
                             <span> </span>
                             <Typical
                                 steps={['Websites.', 1500, 'Mobile Applications.', 1500, 'the world.', 1500, 'it for you!', 2500]}
@@ -57,11 +57,11 @@ const HomeHeader: React.FC<Props> = ({ active, locale }) => {
                     </p>
                     <div className="flex flex-wrap justify-center z-10">
                         <button
-                            className="px-8 py-3 m-2 text-lg font-semibold rounded text-white hover:bg-teal-300 dark:bg-teal-400 dark:text-coolGray-900">
+                            className="px-8 py-3 m-2 text-lg font-semibold rounded text-white hover:bg-teal-300 bg-teal-400 text-coolGray-900">
                             Demandez un devis
                         </button>
                         <button
-                            className="px-8 py-3 m-2 text-lg border rounded text-white hover:bg-teal-400 hover:border-teal-400 dark:text-coolGray-50 dark:border-coolGray-700">
+                            className="px-8 py-3 m-2 text-lg border rounded text-white hover:bg-teal-400 hover:border-teal-400 text-coolGray-50 border-coolGray-700">
                             En savoir plus
                         </button>
                     </div>

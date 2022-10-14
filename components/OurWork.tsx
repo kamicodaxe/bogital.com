@@ -27,7 +27,7 @@ const OurWork: React.FC<Props> = ({ locale, title, isPreview }) => {
                     <p className="mt-4 text-lg text-gray-600">A non-exhaustive list of Bogital Customers</p>
                 </div> */}
                 <h3 className="text-xl font-extrabold sm:text-2xl"> {title || "They trusted us - our favorites"} </h3>
-                <dl className="mt-4 space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-8">
+                <dl className="mt-4 space-y-10 sm:space-y-0 grid-cols-1 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-8">
                     {
                         customers.map((_customer, i) => (
                             <Link className="flex" href={"/projects/project"} key={_customer.title}>

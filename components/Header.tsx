@@ -21,14 +21,14 @@ const HomeHeader: React.FC<Props> = ({ active, locale, className, title, navBarO
     //     </Link>
     // </li>
 
-    const CONTAINER_CLASS_NAME = `bg-cover dark:bg-coolGray-800 dark:text-coolGray-100 bg-center relative `
+    const CONTAINER_CLASS_NAME = `bg-cover bg-coolGray-800 text-coolGray-100 bg-center relative `
     return (
         <header className={CONTAINER_CLASS_NAME + (className || '')}>
             <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)]"></div>
             <NavBar active={active} locale={locale} />
             {
                 !navBarOnly && (
-                    <section className="dark:bg-coolGray-800 dark:text-coolGray-100">
+                    <section className="bg-coolGray-800 text-coolGray-100">
                         <div
                             className="container mx-auto flex flex-col items-center px-4 py-16 text-center md:py-32 md:px-10 lg:px-32 xl:max-w-3xl">
                             <h1 className="text-4xl font-bold leading-none text-white sm:text-5xl z-10">
