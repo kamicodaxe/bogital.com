@@ -19,7 +19,7 @@ const FAQ: React.FC<Props> = ({ locale }) => {
                         s.items.map(_item => (
                             <div key={_item.title}>
                                 <h3 className="font-semibold text-white">{_item.title}</h3>
-                                <p className="mt-1 dark:text-coolGray-400">
+                                <p className="mt-1 text-coolGray-400">
                                     {_item.body}
                                 </p>
                             </div>

@@ -21,7 +21,7 @@ const Blog: React.FC<Props> = ({ }) => {
 
                     <div className="space-y-2 text-center">
                         <h2 className="text-3xl font-bold">Partem reprimique an pro</h2>
-                        <p className="font-serif text-sm dark:text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
+                        <p className="font-serif text-sm text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
                     </div>
 
                     <div className="space-y-4 max-w-md md:max-w-xl mx-auto">

@@ -6,11 +6,11 @@ const Services: React.FC<{}> = ({ }) => {
                 <h2 className="focus:outline-none xl:text-4xl md:text-2xl text-xl text-center font-extrabold mb-5 pt-4">
                     Our Services
                 </h2>
-                {/* <p className="dark:text-coolGray-400">Libero minima optio qui</p> */}
+                {/* <p className="text-coolGray-400">Libero minima optio qui</p> */}
             </div>
             <div className="container mx-auto grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <div className="flex flex-col items-center p-4">
-                    <img className="w-16 h-16 dark:text-teal-400" src="/images/services/fa-html5.svg" />
+                    <img className="w-16 h-16 text-teal-400" src="/images/services/fa-html5.svg" />
                     <h3 className="my-3 text-3xl font-semibold">Responsive Web Design</h3>
                     <div className="space-y-1 leading-tight">
                         <p>
@@ -21,7 +21,7 @@ const Services: React.FC<{}> = ({ }) => {
                     </div>
                 </div>
                 <div className="flex flex-col items-center p-4">
-                    <img className="w-16 h-16 dark:text-teal-400" src="/images/services/fa-mobile-phone.svg" />
+                    <img className="w-16 h-16 text-teal-400" src="/images/services/fa-mobile-phone.svg" />
                     <h3 className="my-3 text-3xl font-semibold">Mobile Application development</h3>
                     <div className="space-y-1 leading-tight">
                         <p>
@@ -31,7 +31,7 @@ const Services: React.FC<{}> = ({ }) => {
                     </div>
                 </div>
                 <div className="flex flex-col items-center p-4">
-                    <img className="w-16 h-16 dark:text-teal-400" src="/images/services/fa-wordpress.svg" />
+                    <img className="w-16 h-16 text-teal-400" src="/images/services/fa-wordpress.svg" />
                     <h3 className="my-3 text-3xl font-semibold">Wordpress Development</h3>
                     <div className="space-y-1 leading-tight">
                         <p>
@@ -41,7 +41,7 @@ const Services: React.FC<{}> = ({ }) => {
                     </div>
                 </div>
                 <div className="flex flex-col items-center p-4">
-                    <img className="w-16 h-16 dark:text-teal-400" src="/images/services/fa-globe.svg" />
+                    <img className="w-16 h-16 text-teal-400" src="/images/services/fa-globe.svg" />
                     <h3 className="my-3 text-3xl font-semibold">SEO</h3>
                     <div className="space-y-1 leading-tight">
                         <p>

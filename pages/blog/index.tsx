@@ -21,25 +21,25 @@ const Blog: React.FC<Props> = ({ }) => {
                 <div className="container p-6 mx-auto space-y-8">
                     <div className="space-y-2 text-center">
                         <h2 className="text-3xl font-bold">Partem reprimique an pro</h2>
-                        <p className="font-serif text-sm dark:text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
+                        <p className="font-serif text-sm text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
                     </div>
                     <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
                         {
                             s.items.map(_item => (
                                 <Link key={_item.title} className="flex" href="/blog/article">
-                                    <article className="flex flex-col cursor-pointer hover:bg-teal-400 hover:text-white dark:bg-coolGray-900">
+                                    <article className="flex flex-col cursor-pointer hover:bg-teal-400 hover:text-white bg-coolGray-900">
                                         <Link rel="" href="/blog/article" aria-label="Te nulla oportere reprimique his dolorum">
                                             <motion.img
-                                                alt="" className="object-cover w-full h-52 dark:bg-coolGray-500"
+                                                alt="" className="object-cover w-full h-52 bg-coolGray-500"
                                                 src={_item.image}
                                                 layoutId="image"
                                             />
                                         </Link>
                                         <div className="flex flex-col flex-1 p-6">
                                             {/* <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a> */}
-                                            <span className="text-xs tracking-wider uppercase dark:text-teal-400">{_item.author}</span>
+                                            <span className="text-xs tracking-wider uppercase text-teal-400">{_item.author}</span>
                                             <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">{_item.title}</h3>
-                                            <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-coolGray-400">
+                                            <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs text-coolGray-400">
                                                 <span>{_item.date}</span>
                                                 <span>{_item.views} views</span>
                                             </div>
@@ -52,17 +52,17 @@ const Blog: React.FC<Props> = ({ }) => {
                 </div>
             </section>
 
-            <div className="flex justify-center space-x-1 dark:text-coolGray-100">
-                <button title="previous" type="button" className="inline-flex items-center justify-center w-8 h-8 py-0 border rounded-md shadow-md dark:bg-coolGray-900 dark:border-coolGray-800">
+            <div className="flex justify-center space-x-1 text-coolGray-100">
+                <button title="previous" type="button" className="inline-flex items-center justify-center w-8 h-8 py-0 border rounded-md shadow-md bg-coolGray-900 border-coolGray-800">
                     <svg viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="w-4">
                         <polyline points="15 18 9 12 15 6"></polyline>
                     </svg>
                 </button>
-                <button type="button" title="Page 1" className="inline-flex items-center justify-center w-8 h-8 text-sm font-semibold border rounded shadow-md dark:bg-coolGray-900 text-teal-400 border-teal-400">1</button>
-                <button type="button" className="inline-flex items-center justify-center w-8 h-8 text-sm border rounded shadow-md dark:bg-coolGray-900 dark:border-coolGray-800" title="Page 2">2</button>
-                <button type="button" className="inline-flex items-center justify-center w-8 h-8 text-sm border rounded shadow-md dark:bg-coolGray-900 dark:border-coolGray-800" title="Page 3">3</button>
-                <button type="button" className="inline-flex items-center justify-center w-8 h-8 text-sm border rounded shadow-md dark:bg-coolGray-900 dark:border-coolGray-800" title="Page 4">4</button>
-                <button title="next" type="button" className="inline-flex items-center justify-center w-8 h-8 py-0 border rounded-md shadow-md dark:bg-coolGray-900 dark:border-coolGray-800">
+                <button type="button" title="Page 1" className="inline-flex items-center justify-center w-8 h-8 text-sm font-semibold border rounded shadow-md bg-coolGray-900 text-teal-400 border-teal-400">1</button>
+                <button type="button" className="inline-flex items-center justify-center w-8 h-8 text-sm border rounded shadow-md bg-coolGray-900 border-coolGray-800" title="Page 2">2</button>
+                <button type="button" className="inline-flex items-center justify-center w-8 h-8 text-sm border rounded shadow-md bg-coolGray-900 border-coolGray-800" title="Page 3">3</button>
+                <button type="button" className="inline-flex items-center justify-center w-8 h-8 text-sm border rounded shadow-md bg-coolGray-900 border-coolGray-800" title="Page 4">4</button>
+                <button title="next" type="button" className="inline-flex items-center justify-center w-8 h-8 py-0 border rounded-md shadow-md bg-coolGray-900 border-coolGray-800">
                     <svg viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="w-4">
                         <polyline points="9 18 15 12 9 6"></polyline>
                     </svg>

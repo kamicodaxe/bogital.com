@@ -87,7 +87,7 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
                 </ul>
                 <div className="items-center flex-shrink-0 hidden lg:flex z-10">
                     <button
-                        className="self-center px-8 py-3 font-semibold rounded text-white hover:bg-teal-300 dark:bg-teal-400 dark:text-coolGray-900">
+                        className="self-center px-8 py-3 font-semibold rounded text-white hover:bg-teal-300 bg-teal-400">
                         <Link href="/contact/"
                             className="flex items-center">
                             <span className="">

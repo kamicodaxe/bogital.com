@@ -17,27 +17,27 @@ const BlogPreview: React.FC<Props> = ({ locale }) => {
             <div className="container p-6 mx-auto space-y-8">
                 <div className="space-y-2 text-center">
                     <h2 className="text-3xl font-bold">Partem reprimique an pro</h2>
-                    <p className="font-serif text-sm dark:text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
+                    <p className="font-serif text-sm text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
                 </div>
                 <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
                     {
                         s.items.map(_item => (
                             <Link key={_item.title} className="flex cursor-pointer" href="/blog/article">
-                                <article className="flex flex-col hover:bg-teal-400 hover:text-white dark:bg-coolGray-900">
+                                <article className="flex flex-col hover:bg-teal-400 hover:text-white bg-coolGray-900">
                                     <Link rel="" href="/blog/article" aria-label="Te nulla oportere reprimique his dolorum">
                                         <motion.img
-                                            alt="" className="object-cover w-full h-52 dark:bg-coolGray-500"
+                                            alt="" className="object-cover w-full h-52 bg-coolGray-500"
                                             src={_item.image}
                                             layoutId="image"
                                         />
-                                        {/* <img alt="" className="object-cover w-full h-52 dark:bg-coolGray-500"
+                                        {/* <img alt="" className="object-cover w-full h-52 bg-coolGray-500"
                                             src={_item.image} /> */}
                                     </Link>
                                     <div className="flex flex-col flex-1 p-6">
                                         {/* <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a> */}
-                                        <span className="text-xs tracking-wider uppercase dark:text-teal-400">{_item.author}</span>
+                                        <span className="text-xs tracking-wider uppercase text-teal-400">{_item.author}</span>
                                         <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">{_item.title}</h3>
-                                        <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-coolGray-400">
+                                        <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs text-coolGray-400">
                                             <span>{_item.date}</span>
                                             <span>{_item.views} views</span>
                                         </div>

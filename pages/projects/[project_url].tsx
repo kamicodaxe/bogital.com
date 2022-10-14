@@ -24,13 +24,13 @@ const Project: React.FC<Props> = ({ }) => {
 
                     <span aria-label="Te nulla oportere reprimique his dolorum">
                         <motion.img
-                            alt="" className="object-cover w-full h-128 dark:bg-coolGray-500"
+                            alt="" className="object-cover w-full h-128 bg-coolGray-500"
                             src="https://source.unsplash.com/random/420x220"
                             layoutId="image0"
                         />
 
                         {/* <motion.figure
-                            className="flex w-full h-128 dark:bg-coolGray-500 object-cover"
+                            className="flex w-full h-128 bg-coolGray-500 object-cover"
                             layoutId={"image0"}>
                             <img src={"https://source.unsplash.com/random/420x220"} className="object-cover" />
                         </motion.figure> */}
@@ -47,7 +47,7 @@ const Project: React.FC<Props> = ({ }) => {
                         </div>
 
                         <motion.h3 layoutId="bName0" className="flex-1 py-2 text-lg font-semibold leading-snug">Librarie J²</motion.h3>
-                        <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-coolGray-400">
+                        <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs text-coolGray-400">
                             <span>June 3, 2020</span>
                             <span>24k views</span>
                         </div>
