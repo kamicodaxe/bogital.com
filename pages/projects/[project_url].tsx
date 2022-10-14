@@ -22,22 +22,15 @@ const Project: React.FC<Props> = ({ }) => {
 
                 <article className="flex flex-col flex-1 bg-coolGray-900">
 
-                    <span aria-label="Te nulla oportere reprimique his dolorum">
-                        <motion.img
-                            alt="" className="object-cover w-full h-128 bg-coolGray-500"
-                            src="https://source.unsplash.com/random/420x220"
-                            layoutId="image0"
+                    <motion.div layoutId="image0" className="min-h-[8rem] md:min-h-[18rem] w-full bg-gray-300">
+                        {/* <Image src="https://source.unsplash.com/random/420x210" width={420} height={210} className="object-cover" /> */}
+                        <img
+                            alt="" className="object-cover w-full"
+                            src="https://source.unsplash.com/random/420x210"
                         />
+                    </motion.div>
 
-                        {/* <motion.figure
-                            className="flex w-full h-128 bg-coolGray-500 object-cover"
-                            layoutId={"image0"}>
-                            <img src={"https://source.unsplash.com/random/420x220"} className="object-cover" />
-                        </motion.figure> */}
-
-                    </span>
-
-                    <div className="flex flex-col flex-1 py-6">
+                    <div className="flex flex-col flex-1 p-4">
                         {/* <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a> */}
 
                         <div className="flex space-x-2">

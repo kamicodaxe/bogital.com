@@ -35,12 +35,18 @@ const OurWork: React.FC<Props> = ({ locale, title, isPreview }) => {
                                     <motion.figure className="flex" layoutId={"image" + i}>
                                         <Image src={"https://source.unsplash.com/random/420x21" + i} width={420} height={210} className="object-cover" />
                                     </motion.figure>
-                                    <div className="mt-2 ml-2 mb-8">
+
+                                    <div className="flex space-x-2 p-2">
+                                        <span className="text-xs tracking-wider uppercase bg-teal-800 text-white p-1 md:p-2">UX</span>
+                                        <span className="text-xs tracking-wider uppercase bg-teal-800 text-white p-1 md:p-2">UI</span>
+                                        <span className="text-xs tracking-wider uppercase bg-teal-800 text-white p-1 md:p-2">Next JS</span>
+                                    </div>
+
+                                    <div className="ml-2 mb-8">
                                         <motion.dt className="text-lg font-medium" layoutId={"bName" + i}>
                                             {_customer.title}
                                         </motion.dt>
-                                        {/* <dt className="text-lg font-medium">{_customer.title}</dt> */}
-                                        <dd className="mt-2 text-gray-600">{_customer.desc}</dd>
+                                        {/* <dd className="mt-2 text-gray-600">{_customer.desc}</dd> */}
                                     </div>
                                 </div>
                             </Link>

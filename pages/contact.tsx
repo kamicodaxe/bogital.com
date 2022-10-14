@@ -59,22 +59,22 @@ const Contact: NextPage<Props> = ({ data }) => {
             <label className="block">
               <span className="mb-1">{s.name}</span>
               <input type="text" placeholder="Leroy Jenkins"
-                className="block w-full rounded-md shadow-sm focus:ring focus:ring-opacity-75 py-2 focus:ring-teal-400 bg-coolGray-800" />
+                className="block w-full rounded-md shadow-sm py-2 bg-coolGray-800 border-b focus:border-teal-400 focus:outline-none" />
             </label>
             <label className="block">
               <span className="mb-1">{s.phone}</span>
               <input type="phone" placeholder="(+1) 512 4587 6321"
-                className="block w-full rounded-md py-2 bg-coolGray-800 border-b focus:border-teal-400 focus:ring-0 focus:ring-offset-0" />
+                className="block w-full rounded-md py-2 bg-coolGray-800 border-b focus:border-teal-400 focus:outline-none" />
             </label>
             <label className="block">
               <span className="mb-1">{s.email}</span>
               <input type="email" placeholder="leroy@jenkins.com"
-                className="block w-full rounded-md shadow-sm focus:ring focus:ring-opacity-75 py-2 focus:ring-teal-400 bg-coolGray-800" />
+                className="block w-full rounded-md shadow-sm py-2 focus:ring-teal-400 bg-coolGray-800 border-b focus:border-teal-400 focus:outline-none" />
             </label>
             <label className="block">
               <span className="mb-1">{s.message}</span>
               <textarea rows={5}
-                className="block w-full rounded-md shadow-sm focus:ring focus:ring-opacity-75 focus:ring-teal-400 bg-coolGray-800"></textarea>
+                className="block w-full rounded-md shadow-sm focus:ring-teal-400 bg-coolGray-800 border-b focus:border-teal-400 focus:outline-none"></textarea>
             </label>
 
             <input type="hidden" name="_next" value="https://Bogital.net"></input>
