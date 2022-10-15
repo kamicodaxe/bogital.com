@@ -27,7 +27,7 @@ const Home: NextPage<Props> = ({ data }) => {
       <Partners />
       <CTA />
       <Services />
-      <Process />
+      <Process locale={locale as string} />
       <FAQ locale={locale as string} />
       <BlogPreview locale={locale as string} />
       <JoinNewsLetter locale={locale as string} />
