@@ -1,14 +1,14 @@
 import { useRouter } from "next/router"
 import { useMemo } from "react"
-import OurWork from "../../components/OurWork"
 import Header from "../../components/Header"
 import Layout from "../../components/Layout"
+import OurWork from "../../components/OurWork"
 
 interface Props {
-
+    projects: any[]
 }
 
-const Projects: React.FC<Props> = ({ }) => {
+const Projects: React.FC<Props> = ({ projects }) => {
     const { locale } = useRouter()
     const lang = useMemo(() => (locale || '').toLowerCase().includes('fr'), [locale]) ? 'fr' : 'en'
     const s = strings[lang]
@@ -16,7 +16,7 @@ const Projects: React.FC<Props> = ({ }) => {
     return (
         <Layout locale={locale as string} title={s.title} desc={s.desc}>
             <Header locale={locale as string} title="Projects" active='projects' className="bg-[url(https://source.unsplash.com/2zDXqgTzEFE/1200x720)]" />
-            <OurWork locale={locale as string} />
+            <OurWork locale={locale as string} projects={projects} />
         </Layout>
     )
 }
@@ -132,5 +132,78 @@ const strings = {
     }
 }
 
+export const projects = [
+    {
+        title: "Bikoula Complexe",
+        desc: "Librarie",
+        platform: "web",
+        image: {
+            src: '/images/our-work/bikoulacomplexe.jpg',
+            alt: ''
+        },
+        tags: ["Web", 'Tailwind CSS', 'Next JS', 'Node JS']
+    },
+    {
+        title: "Les Artisans d'ici (Côte d'ivoire)",
+        desc: "Restaurant",
+        platform: "web",
+        image: {
+            src: '/images/our-work/artisansdici.jpg',
+            alt: ''
+        },
+        tags: ["Web", 'Tailwind CSS', 'Next JS']
+    },
+    {
+        title: "Fenassco Ligue A, en partenariat avec 3CM Cameroun",
+        desc: "Parfumerie",
+        platform: "web",
+        image: {
+            src: '/images/our-work/fenassco-ligue-a.jpg',
+            alt: ''
+        },
+        tags: ["Web", 'Tailwind CSS', 'Next JS', 'Dato CMS']
+    },
+    {
+        title: "Save App",
+        desc: "Bazar",
+        platform: "web",
+        image: {
+            src: '/images/our-work/saveapp.jpg',
+            alt: ''
+        },
+        tags: ["Web", 'CSS 3', 'AWS', 'Amplify']
+    },
+
+    {
+        title: "Gesmax",
+        desc: "Librarie",
+        platform: "mobile",
+        image: {
+            src: '/images/our-work/gesmax.jpg',
+            alt: ''
+        },
+        tags: ["React Native", "Firebase", "Golang", "Node JS"]
+    },
+    {
+        title: "Save App",
+        desc: "Bazar",
+        platform: "mobile",
+        image: {
+            src: '/images/our-work/saveapp.jpg',
+            alt: ''
+        },
+        tags: ["React Native", "Django", "Node JS"]
+    },
+
+]
+
+export async function getStaticProps() {
+    return {
+        props: {
+            projects: projects,
+            revalidate: 0
+        }
+    }
+}
 
 export default Projects

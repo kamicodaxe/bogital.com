@@ -1,4 +1,3 @@
-import { motion } from "framer-motion"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useMemo } from "react"
@@ -29,10 +28,9 @@ const Blog: React.FC<Props> = ({ }) => {
                                 <Link key={_item.title} className="flex" href="/blog/article">
                                     <article className="flex flex-col cursor-pointer hover:bg-teal-400 hover:text-white bg-coolGray-900">
                                         <Link rel="" href="/blog/article" aria-label="Te nulla oportere reprimique his dolorum">
-                                            <motion.img
+                                            <img
                                                 alt="" className="object-cover w-full h-52 bg-coolGray-500"
                                                 src={_item.image}
-                                                layoutId="image"
                                             />
                                         </Link>
                                         <div className="flex flex-col flex-1 p-6">
