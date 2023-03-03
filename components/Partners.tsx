@@ -2,10 +2,10 @@
 const Partners: React.FC<{}> = ({ }) => {
 
     return (
-        <div className="container mx-auto pt-16">
-            <div className="w-11/12 xl:w-2/3 lg:w-2/3 md:w-2/3 mx-auto sm:mb-10 mb-16">
+        <div className="container mx-auto">
+            <div className="section w-11/12 xl:w-2/3 lg:w-2/3 md:w-2/3 mx-auto sm:mb-10 mb-16">
                 <h2 tabIndex={0}
-                    className="focus:outline-none xl:text-4xl md:text-2xl text-xl text-center text-gray-800 font-extrabold mb-5 pt-4">
+                    className="heading">
                     Partnerships</h2>
                 <p tabIndex={0}
                     className="focus:outline-none text-base md:text-lg lg:text-xl text-center text-gray-600 font-normal xl:w-10/12 xl:mx-auto">

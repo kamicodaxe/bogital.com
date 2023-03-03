@@ -1,8 +1,7 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/router"
-import { useCallback, useMemo } from "react"
+import { useMemo } from "react"
 
 interface Props {
     locale: string
@@ -21,12 +20,12 @@ const OurWork: React.FC<Props> = ({ locale, title, isPreview }) => {
 
     return (
         <div className="text-gray-900">
-            <div className="px-4 pt-16 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div className="section">
                 {/* <div className="max-w-3xl mx-auto text-center">
                     <h2 className="text-3xl font-extrabold sm:text-4xl">{title}</h2>
                     <p className="mt-4 text-lg text-gray-600">A non-exhaustive list of Bogital Customers</p>
                 </div> */}
-                <h3 className="text-xl font-extrabold sm:text-2xl"> {title || "They trusted us - our favorites"} </h3>
+                <h3 className="heading"> {title || "They trusted us - our favorites"} </h3>
                 <dl className="mt-4 space-y-10 sm:space-y-0 grid-cols-1 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-8">
                     {
                         customers.map((_customer, i) => (
