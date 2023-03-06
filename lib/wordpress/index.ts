@@ -7,8 +7,8 @@ const app = {
 }
 
 function initialiseWordpress(options = {
-    baseUrl: '',
-    token: ''
+    baseUrl: 'https://wordpress.bogital.com/api',
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiOiJrYW1pY29kYXhlIiwiaWF0IjoxNjc3ODkzMTU2LCJleHAiOjE4MzU1NzMxNTZ9.S063YeaSaIbZ7TAHfNSZLlpBd5CMpVLSoAXcbKqb8mg'
 }) {
     app.baseUrl = process?.env?.WORDPRESS_API_URI || options?.baseUrl
     app.token = process?.env?.WORDPRESS_AUTH_TOKEN || options?.token

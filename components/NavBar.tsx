@@ -14,7 +14,16 @@ const routes = [
     {
         name: "Blog",
         path: "/blog"
-    }
+    },
+    {
+        name: "School",
+        path: "/school"
+    },
+    {
+        name: "Career",
+        path: "/career"
+    },
+
 ]
 
 const NavBar: React.FC<Props> = ({ active, locale }) => {
