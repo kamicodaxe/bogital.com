@@ -4,18 +4,21 @@ import { useRouter } from "next/router"
 import { useMemo } from "react"
 import { projects } from "."
 import Layout from "../../components/Layout"
+import wordpress from "../../lib/wordpress"
+import { IWordpressArticle } from "../../lib/wordpress/types"
 
 interface Props {
-    project: {
-        title: string,
-        desc: string,
-        platform: string,
-        image: {
-            src: string,
-            alt: string
-        },
-        tags: string[]
-    },
+    project: IWordpressArticle
+    // project: {
+    //     title: string,
+    //     desc: string,
+    //     platform: string,
+    //     image: {
+    //         src: string,
+    //         alt: string
+    //     },
+    //     tags: string[]
+    // },
     slug: string
 }
 
@@ -34,21 +37,22 @@ const Project: React.FC<Props> = ({ project, slug }) => {
                     <motion.div layoutId={`image-${slug}`} className="min-h-[8rem] md:min-h-[18rem] w-full bg-gray-300">
                         {/* <Image src="https://source.unsplash.com/random/420x210" width={420} height={210} className="object-cover" /> */}
                         <img
-                            alt={project.image.alt} className="object-cover w-full"
-                            src={project.image.src}
+                            className="object-cover w-full"
+                            src={project._embedded['wp:featuredmedia'][0].source_url}
+                            alt=""
                         />
                     </motion.div>
 
                     <div className="flex flex-col flex-1 p-4">
                         {/* <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a> */}
 
-                        <motion.div layoutId={`tags-${slug}`} className="flex flex-wrap">
+                        {/* <motion.div layoutId={`tags-${slug}`} className="flex flex-wrap">
                             {
                                 project.tags.map(_tag => <span key={_tag} className="text-xs tracking-wider uppercase bg-teal-800 text-white p-1 md:p-2 m-1 ">{_tag}</span>)
                             }
-                        </motion.div>
+                        </motion.div> */}
 
-                        <motion.h3 layoutId={`title-${slug}`} className="flex-1 py-2 text-lg font-semibold leading-snug">{project?.title}</motion.h3>
+                        <motion.h3 layoutId={`title-${slug}`} className="flex-1 py-2 text-lg font-semibold leading-snug">{project?.title.rendered}</motion.h3>
 
                     </div>
 
@@ -56,12 +60,12 @@ const Project: React.FC<Props> = ({ project, slug }) => {
 
                 <div className="flex flex-col flex-1 space-y-4 lg:overflow-y-scroll px-4 sm:pr-12">
 
-                    <div className="prose mx-auto">
-                        <h2 className="text-3xl font-bold text-center">{project?.title}</h2>
+                    <div className="prose mx-auto" dangerouslySetInnerHTML={{ __html: project.content.rendered }}>
+                        {/* <h2 className="text-3xl font-bold text-center">{project?.title.rendered}</h2> */}
                         {/* <p className="font-serif text-sm text-center">Qualisque erroribus usu at, duo te agam soluta mucius.</p> */}
-                        <p className=" text-gray-700">
+                        {/* <p className=" text-gray-700">
                             {project?.desc || "Ut ut iaculis nibh. Nulla commodo ante a ipsum accumsan, eu ornare erat rutrum. Pellentesque pellentesque faucibus nunc id pharetra. Vivamus efficitur sit amet turpis et consectetur. Maecenas erat felis, egestas egestas blandit vitae, viverra sed sem. Maecenas viverra mauris nec urna lacinia, a aliquam arcu elementum. Curabitur nec pretium eros. Pellentesque vehicula sollicitudin enim, ac rhoncus lacus ultrices tempor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque aliquet, orci vel ultricies convallis, dolor ligula euismod eros, quis varius felis lacus ac sapien. Fusce efficitur aliquet ligula, sed commodo felis mattis nec. In hac habitasse platea dictumst. In vel lectus sed lectus convallis tristique et id arcu. Donec nec ante suscipit, molestie urna sed, bibendum ex."}
-                        </p>
+                        </p> */}
                     </div>
 
                 </div>
@@ -107,17 +111,29 @@ const strings = {
 }
 
 
-
 export const getStaticProps: GetStaticProps = async (context) => {
+    wordpress.initialiseWordpress()
+    const projects = await wordpress.getCollection('projects?_embed') as IWordpressArticle[]
+    const data = await wordpress.getCollection(`projects?slug=${context?.params?.slug}&_embed`) as IWordpressArticle[]
+    if (data.length > 0) return {
+        props: {
+            project: data[0],
+            projects,
+            slug: context.params?.slug,
+            revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
+        }
+    }
 
     return {
         props: {
-            project: projects.filter(_project => _project.title.toLowerCase().split(' ').join('-') == context.params?.slug)[0],
+            projects: [],
             slug: context.params?.slug,
-            revalidate: 0
+            revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
         }
     }
 }
+
+
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {

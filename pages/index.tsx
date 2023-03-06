@@ -13,12 +13,12 @@ import Process from '../components/Process'
 import Services from '../components/Services'
 import wordpress from '../lib/wordpress'
 import { IWordpressArticle } from '../lib/wordpress/types'
-import { projects } from './projects'
 
 interface Props {
   articles: IWordpressArticle[]
+  projects: IWordpressArticle[]
 }
-const Home: NextPage<Props> = ({ articles }) => {
+const Home: NextPage<Props> = ({ articles, projects }) => {
   const { locale } = useRouter()
   const title = "Bogital - Software development experts, we make the world a better place for you."
   const desc = "Bogital - Software development experts, we make the world a better place for you."
@@ -46,12 +46,14 @@ const Home: NextPage<Props> = ({ articles }) => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   wordpress.initialiseWordpress()
-  const data = await wordpress.getCollection('posts?_embed') as IWordpressArticle[]
+  const articles = await wordpress.getCollection('posts?_embed') as IWordpressArticle[]
+  const projects = await wordpress.getCollection('projects?_embed') as IWordpressArticle[]
 
   return {
     props: {
-      articles: data,
-      revalidate: 0
+      articles,
+      projects,
+      revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
     }
   }
 }

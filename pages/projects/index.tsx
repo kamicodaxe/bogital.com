@@ -3,15 +3,19 @@ import { useMemo } from "react"
 import Header from "../../components/Header"
 import Layout from "../../components/Layout"
 import OurWork from "../../components/OurWork"
+import wordpress from "../../lib/wordpress"
+import { IWordpressArticle } from "../../lib/wordpress/types"
 
 interface Props {
-    projects: any[]
+    projects: IWordpressArticle[]
 }
 
 const Projects: React.FC<Props> = ({ projects }) => {
     const { locale } = useRouter()
     const lang = useMemo(() => (locale || '').toLowerCase().includes('fr'), [locale]) ? 'fr' : 'en'
     const s = strings[lang]
+
+    console.log(projects)
 
     return (
         <Layout locale={locale as string} title={s.title} desc={s.desc}>
@@ -198,12 +202,25 @@ export const projects = [
 ]
 
 export async function getStaticProps() {
+    wordpress.initialiseWordpress()
+    const data = await wordpress.getCollection('projects?_embed') as IWordpressArticle[]
+
     return {
         props: {
-            projects: projects,
-            revalidate: 0
+            projects: data,
+            revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
         }
     }
+
 }
+
+// export async function getStaticProps() {
+//     return {
+//         props: {
+//             projects: projects,
+//             revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
+//         }
+//     }
+// }
 
 export default Projects

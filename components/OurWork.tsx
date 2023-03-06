@@ -1,22 +1,24 @@
 import { motion } from "framer-motion"
-import Image from "next/image"
+// import Image from "next/image"
 import Link from "next/link"
 import { useMemo } from "react"
+import { IWordpressArticle } from "../lib/wordpress/types"
 
 interface Props {
     locale: string
     title?: string
     isPreview?: boolean,
-    projects: {
-        title: string,
-        desc: string,
-        platform: string,
-        image: {
-            src: string,
-            alt: string
-        },
-        tags: string[]
-    }[]
+    projects: IWordpressArticle[]
+    // projects: {
+    //     title: string,
+    //     desc: string,
+    //     platform: string,
+    //     image: {
+    //         src: string,
+    //         alt: string
+    //     },
+    //     tags: string[]
+    // }[]
 }
 
 const Tick = () => (
@@ -43,26 +45,25 @@ const OurWork: React.FC<Props> = ({ locale, title, isPreview, projects }) => {
                 }
                 <dl className="mt-4 space-y-10 sm:space-y-0 grid-cols-1 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-8">
                     {
-                        projects.filter(_ => _.platform == "web").map((_customer, i) => {
-                            const slug = _customer.title.toLowerCase().split(' ').join('-')
+                        projects.map((_customer, i) => {
                             return (
-                                <Link className="flex" href={`/projects/${slug}`} key={_customer.title}>
+                                <Link className="flex" href={`/projects/${_customer.slug}`} key={_customer.id}>
                                     <div className="flex flex-col cursor-pointer hover:bg-teal-400 hover:text-white">
-                                        <motion.figure className="flex" layoutId={"image-" + slug}>
-                                            <Image src={_customer.image.src} width={420} height={260} className="object-cover" alt={_customer.image.alt} />
+                                        <motion.figure className="flex" layoutId={"image-" + _customer.slug}>
+                                            <img src={_customer._embedded['wp:featuredmedia'][0].source_url} width={420} height={260} className="object-cover" alt={''} />
                                         </motion.figure>
 
                                         <div className="ml-2 mt-2">
-                                            <motion.dt className="text-lg font-medium" layoutId={"title-" + slug}>
-                                                {_customer.title}
+                                            <motion.dt className="text-lg font-medium" layoutId={"title-" + _customer.slug}>
+                                                <div dangerouslySetInnerHTML={{ __html: _customer.title.rendered }} />
                                             </motion.dt>
                                             {/* <dd className="mt-2 text-gray-600">{_customer.desc}</dd> */}
                                         </div>
 
-                                        <motion.div layoutId={`tags-${slug}`} className="flex p-2  mb-8 flex-wrap">
-                                            {
+                                        <motion.div layoutId={`tags-${_customer.slug}`} className="flex p-2  mb-8 flex-wrap">
+                                            {/* {
                                                 _customer.tags.map(_tag => <span key={_tag} className="text-xs tracking-wider uppercase bg-teal-800 text-white p-1 md:p-2 m-1 ">{_tag}</span>)
-                                            }
+                                            } */}
                                         </motion.div>
 
                                     </div>
@@ -72,50 +73,49 @@ const OurWork: React.FC<Props> = ({ locale, title, isPreview, projects }) => {
                     }
                 </dl>
 
-                {
-                    !isPreview && (
-                        <>
-                            <h3 className="text-xl font-extrabold sm:text-2xl">Mobile applications</h3>
-                            <dl className="mt-4 space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-8">
-                                {
-                                    projects.filter(_ => _.platform == "mobile").map((_customer, i) => {
-                                        const slug = _customer.title.toLowerCase().split(' ').join('-')
-                                        return (
-                                            <Link className="flex" href={`/projects/${slug}`} key={_customer.title}>
-                                                <div className="flex flex-col cursor-pointer hover:bg-teal-400 hover:text-white">
-                                                    <motion.figure className="flex" layoutId={"image-" + slug}>
-                                                        <Image src={_customer.image.src} width={420} height={260} className="object-cover" alt={_customer.image.alt} />
-                                                    </motion.figure>
-
-                                                    <div className="ml-2 mt-2">
-                                                        <motion.dt className="text-lg font-medium" layoutId={"title-" + slug}>
-                                                            {_customer.title}
-                                                        </motion.dt>
-                                                        {/* <dd className="mt-2 text-gray-600">{_customer.desc}</dd> */}
-                                                    </div>
-
-                                                    <div className="flex p-2  mb-8 flex-wrap">
-                                                        {
-                                                            _customer.tags.map(_tag => <span key={_tag} className="text-xs tracking-wider uppercase bg-teal-800 text-white p-1 md:p-2 m-1 ">{_tag}</span>)
-                                                        }
-                                                    </div>
-                                                </div>
-                                            </Link>
-                                        )
-                                    })
-                                }
-                            </dl>
-
-                        </>
-                    )
-                }
-
-
             </div>
         </div>
     )
 }
 
+
+// {
+//     !isPreview && (
+//         <>
+//             <h3 className="text-xl font-extrabold sm:text-2xl">Mobile applications</h3>
+//             <dl className="mt-4 space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-8">
+//                 {
+//                     projects.filter(_ => _.platform == "mobile").map((_customer, i) => {
+//                         const slug = _customer.title.toLowerCase().split(' ').join('-')
+//                         return (
+//                             <Link className="flex" href={`/projects/${slug}`} key={_customer.title}>
+//                                 <div className="flex flex-col cursor-pointer hover:bg-teal-400 hover:text-white">
+//                                     <motion.figure className="flex" layoutId={"image-" + slug}>
+//                                         <Image src={_customer.image.src} width={420} height={260} className="object-cover" alt={_customer.image.alt} />
+//                                     </motion.figure>
+
+//                                     <div className="ml-2 mt-2">
+//                                         <motion.dt className="text-lg font-medium" layoutId={"title-" + slug}>
+//                                             {_customer.title}
+//                                         </motion.dt>
+//                                         {/* <dd className="mt-2 text-gray-600">{_customer.desc}</dd> */}
+//                                     </div>
+
+//                                     <div className="flex p-2  mb-8 flex-wrap">
+//                                         {
+//                                             _customer.tags.map(_tag => <span key={_tag} className="text-xs tracking-wider uppercase bg-teal-800 text-white p-1 md:p-2 m-1 ">{_tag}</span>)
+//                                         }
+//                                     </div>
+//                                 </div>
+//                             </Link >
+//                         )
+//                     })
+//                 }
+//             </dl >
+
+//         </>
+//     )
+// }
 
 
 export default OurWork

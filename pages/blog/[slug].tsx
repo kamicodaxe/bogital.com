@@ -189,7 +189,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
             article: data[0],
             articles,
             slug: context.params?.slug,
-            revalidate: 0
+            revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
         }
     }
 
@@ -197,7 +197,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         props: {
             article: strings.en.items[0],
             slug: context.params?.slug,
-            revalidate: 0
+            revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
         }
     }
 }

@@ -1,9 +1,22 @@
-import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
 import { useEffect } from 'react'
+import '../styles/globals.css'
 // import reportWebVitals from "./reportWebVitals";
 import { AnimateSharedLayout } from "framer-motion"
+
+import ProgressBar from '../components/ProgressBar'
+
+const progress = new ProgressBar({
+  size: 2,
+  color: "rgb(91,209,215)",
+  className: "bar-of-progress",
+  delay: 100,
+});
+
+Router.events.on("routeChangeStart", progress.start);
+Router.events.on("routeChangeComplete", progress.finish);
+Router.events.on("routeChangeError", progress.finish);
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = (url: string) => {

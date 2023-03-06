@@ -128,7 +128,7 @@ export async function getStaticProps() {
     return {
         props: {
             articles: data,
-            revalidate: 0
+            revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
         }
     }
 
