@@ -203,6 +203,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+    wordpress.initialiseWordpress()
     const articles = await wordpress.getCollection('posts?_embed') as IWordpressArticle[]
     return {
         paths: articles.map($ => ({ 'params': { slug: $.slug } })), //OK
