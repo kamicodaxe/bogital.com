@@ -4,15 +4,18 @@ import { useRouter } from "next/router"
 import { useMemo } from "react"
 import Header from "../../components/Header"
 import Layout from "../../components/Layout"
+import wordpress from "../../lib/wordpress"
+import { IWordpressArticle } from "../../lib/wordpress/types"
 
 interface Props {
-
+    articles: IWordpressArticle[]
 }
 
-const Blog: React.FC<Props> = ({ }) => {
+const Blog: React.FC<Props> = ({ articles }) => {
     const { locale } = useRouter()
     const lang = useMemo(() => (locale || '').toLowerCase().includes('fr'), [locale]) ? 'fr' : 'en'
     const s = strings[lang]
+    console.log(articles)
 
     return (
         <Layout locale={locale as string} title={s?.title} desc={s?.desc}>
@@ -20,35 +23,33 @@ const Blog: React.FC<Props> = ({ }) => {
             <section className="py-6 sm:py-12 text-gray-800">
                 <div className="container p-6 mx-auto space-y-8">
                     <div className="space-y-2 text-center">
-                        <h2 className="text-3xl font-bold">Partem reprimique an pro</h2>
+                        <h2 className="text-3xl font-bold">Actualités, Articles...</h2>
                         <p className="font-serif text-sm text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
                     </div>
                     <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
                         {
-                            s.items.map(_item => {
-                                const slug = _item.title.toLowerCase().split(' ').join('-')
+                            articles.map(_item => {
+
                                 return (
-                                    <Link key={_item.title} className="flex cursor-pointer" href={`/blog/${slug}`}>
+                                    <Link key={_item.id} className="flex cursor-pointer" href={`/blog/${_item.slug}`}>
                                         <article className="flex flex-col cursor-pointer hover:bg-teal-400 hover:text-white bg-coolGray-900">
-                                            <Link rel="" href={`/blog/${slug}`} aria-label={_item.title}>
+                                            <Link rel="" href={`/blog/${_item.slug}`} aria-label={_item.title.rendered}>
                                                 <motion.img
                                                     className="object-cover w-full h-52 bg-coolGray-500"
-                                                    {..._item.image}
-                                                    layoutId="image"
+                                                    src={_item._embedded['wp:featuredmedia'][0].source_url}
+                                                    layoutId={"image-" + _item.id}
                                                 />
                                                 {/* <img alt="" className="object-cover w-full h-52 bg-coolGray-500"
                                                 src={_item.image} /> */}
                                             </Link>
                                             <div className="flex flex-col flex-1 ">
                                                 {/* <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a> */}
-                                                {/* <span className="text-xs tracking-wider uppercase text-teal-400">{_item.author}</span> */}
-                                                <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">{_item.title}</h3>
-                                                <p>
-                                                    {_item.body.split(' ').slice(0, 16).join(' ')}...
-                                                </p>
+                                                <span className="text-xs tracking-wider uppercase text-teal-400 pt-2">{_item._embedded.author[0].name}</span>
+                                                <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">{_item.title.rendered}</h3>
+                                                <div dangerouslySetInnerHTML={{ __html: _item.excerpt.rendered }} />
                                                 <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs text-coolGray-400">
                                                     <span>{_item.date}</span>
-                                                    <span>{_item.views} views</span>
+                                                    {/* <span>{_item.views} views</span> */}
                                                 </div>
                                             </div>
                                         </article>
@@ -120,5 +121,17 @@ const strings = {
     }
 }
 
+export async function getStaticProps() {
+    wordpress.initialiseWordpress()
+    const data = await wordpress.getCollection('posts?_embed') as IWordpressArticle[]
+
+    return {
+        props: {
+            articles: data,
+            revalidate: 0
+        }
+    }
+
+}
 
 export default Blog

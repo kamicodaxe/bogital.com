@@ -1,4 +1,3 @@
-import { motion } from "framer-motion"
 import { GetStaticPaths, GetStaticProps } from "next"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -6,20 +5,24 @@ import { useMemo } from "react"
 import BlogPreview from "../../components/BlogPreview"
 import Header from "../../components/Header"
 import Layout from "../../components/Layout"
+import wordpress from "../../lib/wordpress"
+import { IWordpressArticle } from "../../lib/wordpress/types"
 
 interface Props {
-    article: any,
+    article: IWordpressArticle,
+    articles: IWordpressArticle[],
     slug: string
 }
 
-const Blog: React.FC<Props> = ({ article, slug }) => {
+const Blog: React.FC<Props> = ({ article, articles, slug }) => {
     const { locale } = useRouter()
     const lang = useMemo(() => (locale || '').toLowerCase().includes('fr'), [locale]) ? 'fr' : 'en'
     const s = strings[lang]
 
+    // console.log(article)
     return (
         <Layout locale={locale as string} title={s.title} desc={s.desc}>
-            <Header locale={locale as string} title={article?.title} active='blog' className="bg-[url(https://source.unsplash.com/ip9R11FMbV8/1200x720)]" />
+            <Header locale={locale as string} title={article?.title.rendered} active='blog' className="bg-[url(https://source.unsplash.com/ip9R11FMbV8/1200x720)]" />
             <section className=" text-gray-800">
                 <div className="grid grid-cols-3 relative">
 
@@ -28,62 +31,38 @@ const Blog: React.FC<Props> = ({ article, slug }) => {
                         <div className=" max-w-fit mt-10">
                             <div className="flex flex-wrap justify-between text-sm font-bold text-coolGray-400">
                                 <span className="">{article?.date}</span>
-                                <span className="">{article?.views} views</span>
+                                {/* <span className="">{article?.views} views</span> */}
                             </div>
                             <img
                                 className=""
-                                {...article.image}
-                                layoutId="image"
+                                src={article._embedded['wp:featuredmedia'][0].source_url}
+                                alt=""
+                            // layoutId="image"
                             />
                         </div>
 
-                        <div className="prose lg:prose-xl">
+                        <div className="prose lg:prose-xl" dangerouslySetInnerHTML={{ __html: article.content.rendered }} />
 
-
-                            <p className="">
-                                Fusce ac egestas diam, tristique lacinia purus. Ut ut iaculis nibh. Nulla commodo ante a ipsum accumsan, eu ornare erat rutrum. Pellentesque pellentesque faucibus nunc id pharetra. Vivamus efficitur sit amet turpis et consectetur. Maecenas erat felis, egestas egestas blandit vitae, viverra sed sem. Maecenas viverra mauris nec urna lacinia, a aliquam arcu elementum. Curabitur nec pretium eros. Pellentesque vehicula sollicitudin enim, ac rhoncus lacus ultrices tempor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque aliquet, orci vel ultricies convallis, dolor ligula euismod eros, quis varius felis lacus ac sapien. Fusce efficitur aliquet ligula, sed commodo felis mattis nec. In hac habitasse platea dictumst. In vel lectus sed lectus convallis tristique et id arcu. Donec nec ante suscipit, molestie urna sed, bibendum ex.
-                            </p>
-
-                            <p className="">
-                                Fusce ac egestas diam, tristique lacinia purus. Ut ut iaculis nibh. Nulla commodo ante a ipsum accumsan, eu ornare erat rutrum. Pellentesque pellentesque faucibus nunc id pharetra. Vivamus efficitur sit amet turpis et consectetur. Maecenas erat felis, egestas egestas blandit vitae, viverra sed sem. Maecenas viverra mauris nec urna lacinia, a aliquam arcu elementum. Curabitur nec pretium eros. Pellentesque vehicula sollicitudin enim, ac rhoncus lacus ultrices tempor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque aliquet, orci vel ultricies convallis, dolor ligula euismod eros, quis varius felis lacus ac sapien. Fusce efficitur aliquet ligula, sed commodo felis mattis nec. In hac habitasse platea dictumst. In vel lectus sed lectus convallis tristique et id arcu. Donec nec ante suscipit, molestie urna sed, bibendum ex.
-                            </p>
-
-                            <motion.img
-                                alt="" className="h-52 mx-auto"
-                                src="/images/presentation_image.png"
-                                layoutId={`image-${slug}`}
-                            />
-
-                            <p className="">
-                                Fusce ac egestas diam, tristique lacinia purus. Ut ut iaculis nibh. Nulla commodo ante a ipsum accumsan, eu ornare erat rutrum. Pellentesque pellentesque faucibus nunc id pharetra. Vivamus efficitur sit amet turpis et consectetur. Maecenas erat felis, egestas egestas blandit vitae, viverra sed sem. Maecenas viverra mauris nec urna lacinia, a aliquam arcu elementum. Curabitur nec pretium eros. Pellentesque vehicula sollicitudin enim, ac rhoncus lacus ultrices tempor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque aliquet, orci vel ultricies convallis, dolor ligula euismod eros, quis varius felis lacus ac sapien. Fusce efficitur aliquet ligula, sed commodo felis mattis nec. In hac habitasse platea dictumst. In vel lectus sed lectus convallis tristique et id arcu. Donec nec ante suscipit, molestie urna sed, bibendum ex.
-                            </p>
-
-                            <p className="">
-                                Ut ut iaculis nibh. Nulla commodo ante a ipsum accumsan, eu ornare erat rutrum. Pellentesque pellentesque faucibus nunc id pharetra. Vivamus efficitur sit amet turpis et consectetur.
-                            </p>
-
-                        </div>
 
                     </div>
 
                     <div className="pt-12 hidden md:block space-y-4">
                         {
-                            s.items.map(_item => (
-                                <Link key={_item.title} href="/blog/article">
+                            articles.map(_item => (
+                                <Link key={_item.id} href={`/blog/${_item.slug}`}>
                                     <article className="flex cursor-pointer items-center hover:bg-teal-400 hover:text-white bg-coolGray-900">
-                                        <Link rel="" href="/blog/article" aria-label="Te nulla oportere reprimique his dolorum">
-                                            <img
-                                                className="object-cover w-16 h-16 bg-coolGray-500"
-                                                {..._item.image}
-                                            />
-                                        </Link>
+                                        <img
+                                            className="object-cover w-16 h-16 bg-coolGray-500"
+                                            src={_item._embedded['wp:featuredmedia'][0].source_url}
+                                            alt=""
+                                        />
                                         <div className="px-2">
                                             {/* <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a> */}
-                                            <h6 className=" font-semibold leading-snug text-md">{_item.title}</h6>
+                                            <h6 className=" font-semibold leading-snug text-md">{_item.title.rendered}</h6>
                                             {/* <span className="text-xs tracking-wider uppercase text-teal-400">{_item.author}</span> */}
                                             <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs text-coolGray-400">
                                                 <span>{_item.date}</span>
-                                                <span>{_item.views} views</span>
+                                                {/* <span>{_item.views} views</span> */}
                                             </div>
                                         </div>
                                     </article>
@@ -94,7 +73,7 @@ const Blog: React.FC<Props> = ({ article, slug }) => {
 
                 </div>
 
-                <BlogPreview locale={locale as string} />
+                <BlogPreview locale={locale as string} articles={articles} />
 
             </section>
         </Layout>
@@ -202,6 +181,17 @@ const strings = {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
+    wordpress.initialiseWordpress()
+    const articles = await wordpress.getCollection('posts?_embed') as IWordpressArticle[]
+    const data = await wordpress.getCollection(`posts?slug=${context?.params?.slug}&_embed`) as IWordpressArticle[]
+    if (data.length > 0) return {
+        props: {
+            article: data[0],
+            articles,
+            slug: context.params?.slug,
+            revalidate: 0
+        }
+    }
 
     return {
         props: {
