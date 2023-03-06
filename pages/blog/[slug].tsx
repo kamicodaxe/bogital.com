@@ -203,8 +203,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+    const articles = await wordpress.getCollection('posts?_embed') as IWordpressArticle[]
     return {
-        paths: strings.en.items.map($ => ({ 'params': { slug: $.title.toLowerCase().split(' ').join('-') } })), //OK
+        paths: articles.map($ => ({ 'params': { slug: $.slug } })), //OK
         fallback: 'blocking'
     }
 

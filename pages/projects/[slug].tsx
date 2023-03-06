@@ -2,7 +2,6 @@ import { motion } from "framer-motion"
 import { GetStaticPaths, GetStaticProps } from "next"
 import { useRouter } from "next/router"
 import { useMemo } from "react"
-import { projects } from "."
 import Layout from "../../components/Layout"
 import wordpress from "../../lib/wordpress"
 import { IWordpressArticle } from "../../lib/wordpress/types"
@@ -136,8 +135,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 
 export const getStaticPaths: GetStaticPaths = async () => {
+    wordpress.initialiseWordpress()
+    const projects = await wordpress.getCollection('projects?_embed') as IWordpressArticle[]
     return {
-        paths: projects.map($ => ({ 'params': { slug: $.title.toLowerCase().split(' ').join('-') } })), //OK
+        paths: projects.map($ => ({ 'params': { slug: $.slug } })), //OK
         fallback: 'blocking'
     }
 
