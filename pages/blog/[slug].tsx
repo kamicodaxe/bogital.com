@@ -182,7 +182,7 @@ const strings = {
 
 export const getStaticProps: GetStaticProps = async (context) => {
     wordpress.initialiseWordpress()
-    const articles = await wordpress.getCollection(`projects?lang=${context.locale}&_embed`) as IWordpressArticle[]
+    const articles = await wordpress.getCollection(`posts?lang=${context.locale}&_embed`) as IWordpressArticle[]
     const data = await wordpress.getCollection(`posts?lang=${context.locale}&slug=${context?.params?.slug}&_embed`) as IWordpressArticle[]
     if (data.length > 0) return {
         props: {
