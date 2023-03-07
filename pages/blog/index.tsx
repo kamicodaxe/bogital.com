@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import { GetStaticProps } from "next"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useMemo } from "react"
@@ -121,9 +122,9 @@ const strings = {
     }
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async (context) => {
     wordpress.initialiseWordpress()
-    const data = await wordpress.getCollection('posts?_embed') as IWordpressArticle[]
+    const data = await wordpress.getCollection(`posts?lang=${context.locale}&_embed`) as IWordpressArticle[]
 
     return {
         props: {
@@ -131,7 +132,6 @@ export async function getStaticProps() {
             revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
         }
     }
-
 }
 
 export default Blog

@@ -1,6 +1,5 @@
 import type { GetStaticProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 import BlogPreview from '../components/BlogPreview'
 import CTA from '../components/CTA'
 import FAQ from '../components/FAQ'
@@ -23,11 +22,6 @@ const Home: NextPage<Props> = ({ articles, projects }) => {
   const title = "Bogital - Software development experts, we make the world a better place for you."
   const desc = "Bogital - Software development experts, we make the world a better place for you."
 
-  useEffect(() => {
-    wordpress.initialiseWordpress()
-    wordpress.getCollection('posts')
-  })
-
   return (
     <Layout locale={locale as string} title={title} desc={desc}>
       <HomeHeader locale={locale as string} active="home" />
@@ -46,9 +40,9 @@ const Home: NextPage<Props> = ({ articles, projects }) => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   wordpress.initialiseWordpress()
-  const articles = await wordpress.getCollection('posts?_embed') as IWordpressArticle[]
-  const projects = await wordpress.getCollection('projects?_embed') as IWordpressArticle[]
-
+  const params = "&per_page=4"
+  const articles = await wordpress.getCollection(`posts?lang=${context.locale}&_embed${params}`) as IWordpressArticle[]
+  const projects = await wordpress.getCollection(`projects?lang=${context.locale}&_embed${params}`) as IWordpressArticle[]
   return {
     props: {
       articles,
@@ -57,5 +51,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
   }
 }
+
 
 export default Home

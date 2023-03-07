@@ -1,7 +1,9 @@
-import Head from 'next/head'
-import Script from 'next/script'
-import { useMemo } from 'react'
-import Footer from "./Footer"
+// @ts-ignore
+import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
+import Head from 'next/head';
+import Script from 'next/script';
+import { useMemo } from 'react';
+import Footer from "./Footer";
 
 
 interface Props extends React.PropsWithChildren {
@@ -19,7 +21,7 @@ const Layout: React.FC<Props> = ({ children, locale, title, desc, hideFooter }) 
     const isFr = useMemo(() => locale.toLowerCase().includes('fr'), [locale])
     const lang = isFr ? 'fr_FR' : 'en_US'
     const siteName = isFr ? "Bogital - Nous vous accompagnons dans la digitalisation de votre activité." : "Bogital - We build software to make your life easier"
-    
+
     return (
         <div>
             <Head>
@@ -47,25 +49,16 @@ const Layout: React.FC<Props> = ({ children, locale, title, desc, hideFooter }) 
 
             {/* @ts-ignore */}
             {!hideFooter && <Footer locale={locale as string} />}
-            
+
             <Script
                 strategy="afterInteractive"
                 src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
             />
-            <Script
-                id="gtag-init"
-                strategy="afterInteractive"
-                dangerouslySetInnerHTML={{
-                    __html: `
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag(){dataLayer.push(arguments);}
-                        gtag('js', new Date());
-                        gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
-                        page_path: window.location.pathname,
-                        });
-                    `,
-                }}
-            />
+            {
+                title !== "Contact" && <TawkMessengerReact
+                    propertyId="64064e8131ebfa0fe7f10821"
+                    widgetId="1gqsa5aj9" />
+            }
         </div>
     )
 }

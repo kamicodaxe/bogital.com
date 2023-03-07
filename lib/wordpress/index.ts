@@ -26,7 +26,6 @@ async function getCollection(collectionPath: string) {
             },
         })
         const data = await response.json()
-        console.log("Success:", data);
         return data
     } catch (e) {
         console.log(e)

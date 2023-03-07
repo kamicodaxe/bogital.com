@@ -182,8 +182,8 @@ const strings = {
 
 export const getStaticProps: GetStaticProps = async (context) => {
     wordpress.initialiseWordpress()
-    const articles = await wordpress.getCollection('posts?_embed') as IWordpressArticle[]
-    const data = await wordpress.getCollection(`posts?slug=${context?.params?.slug}&_embed`) as IWordpressArticle[]
+    const articles = await wordpress.getCollection(`projects?lang=${context.locale}&_embed`) as IWordpressArticle[]
+    const data = await wordpress.getCollection(`posts?lang=${context.locale}&slug=${context?.params?.slug}&_embed`) as IWordpressArticle[]
     if (data.length > 0) return {
         props: {
             article: data[0],
@@ -202,9 +202,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async (context) => {
     wordpress.initialiseWordpress()
-    const articles = await wordpress.getCollection('posts?_embed') as IWordpressArticle[]
+    const articles = await wordpress.getCollection(`projects?_embed`) as IWordpressArticle[]
     return {
         paths: articles.map($ => ({ 'params': { slug: $.slug } })), //OK
         fallback: 'blocking'
