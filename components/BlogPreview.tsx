@@ -20,8 +20,8 @@ const BlogPreview: React.FC<Props> = ({ locale, articles, isPreview }) => {
                 {
                     isPreview && (
                         <div className="space-y-2 text-center">
-                            <h2 className="text-3xl font-bold">Partem reprimique an pro</h2>
-                            <p className="font-serif text-sm text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
+                            <h2 className="text-3xl font-bold">{s.title}</h2>
+                            <p className="font-serif text-sm text-coolGray-400"> {s.subtitle} </p>
                         </div>
                     )
                 }
@@ -64,6 +64,8 @@ const BlogPreview: React.FC<Props> = ({ locale, articles, isPreview }) => {
 
 const strings = {
     'en': {
+        title: 'Articles',
+        subtitle: '',
         items: [
             {
                 title: "How much will it cost me?",
@@ -79,6 +81,8 @@ const strings = {
         ]
     },
     'fr': {
+        title: 'Articles',
+        subtitle: '',
         items: [
             {
                 title: "How much will it cost me?",

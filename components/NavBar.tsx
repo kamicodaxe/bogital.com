@@ -85,9 +85,10 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
                             </span>
                         </Link>
                     </button>
-                    <div className="flex items-center justify-center px-4">
+
+
+                    {/* <div className="flex items-center justify-center px-4">
                         <div className="relative inline-block">
-                            {/* Dropdown toggle button  */}
                             <button onMouseOver={showMenu} onMouseLeave={hideMenu}
                                 className="relative z-50 block p-2 text-gray-700 bg-white border border-transparent rounded-md dark:text-white focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:bg-gray-800 focus:outline-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -97,7 +98,6 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
                                 </svg>
                             </button>
 
-                            {/* Dropdown menu  */}
                             <div id="drop-down"
                                 className="absolute right-0 z-20 mt-2 hidden overflow-hidden bg-white rounded-md shadow-lg w-80 dark:bg-gray-800">
                                 <div className="py-2">
@@ -117,7 +117,7 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                 </div>
                 <button className="p-4 lg:hidden z-50">

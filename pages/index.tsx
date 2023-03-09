@@ -5,7 +5,6 @@ import BlogPreview from '../components/BlogPreview'
 import CTA from '../components/CTA'
 import FAQ from '../components/FAQ'
 import HomeHeader from '../components/HomeHeader'
-import JoinNewsLetter from '../components/JoinNewsLetter'
 import Layout from '../components/Layout'
 import OurWork from '../components/OurWork'
 import Partners from '../components/Partners'
@@ -29,7 +28,7 @@ const Home: NextPage<IHomePageData> = ({ data: { projects, posts } }) => {
       <Process locale={locale as string} />
       <FAQ locale={locale as string} />
       <BlogPreview isPreview locale={locale as string} articles={posts?.edges?.map(p => p.node) || []} />
-      <JoinNewsLetter locale={locale as string} />
+      {/* <JoinNewsLetter locale={locale as string} /> */}
     </Layout>
   )
 }
