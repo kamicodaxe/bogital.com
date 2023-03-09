@@ -17,7 +17,7 @@ const Services: React.FC<Props> = ({ locale }) => {
             </div>
             <div className="container mx-auto grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {
-                    s.items.map(_service => (<div className="flex flex-col items-center p-4">
+                    s.items.map(_service => (<div key={_service.title} className="flex flex-col items-center p-4">
                         <img className="w-16 h-16 text-teal-400" src={_service.image.src} alt={_service.image.alt} />
                         <h3 className="my-3 text-3xl font-semibold">{_service.title}</h3>
                         <div className="space-y-1 leading-tight">

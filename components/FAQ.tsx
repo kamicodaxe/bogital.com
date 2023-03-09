@@ -50,7 +50,7 @@ const strings = {
             },
             {
                 title: "How to update my website?",
-                body: "We provide a personalised content manager for all the web sites we develop at Bogital Cameroon. This content manager provides a simple interface to update the content of your website.In addition, we build Wordpress websites which are very easy to customise."
+                body: "We provide a personalised content manager for all the web sites we develop at Bogital Cameroon. This content manager provides a simple interface to update the content of your website.In addition, we build Wordpress websites which are very easy to to manage and update."
             }
         ]
     },
@@ -59,20 +59,20 @@ const strings = {
         subtitle: "Questions frequenment demandée",
         items: [
             {
-                title: "How much will it cost me?",
-                body: "The cost depends on many factors. These factors may include: features, technologies used in the backend, hosting, private emails, design complexity, client skills etc... Contact us directly for more information."
+                title: "Combien ça va me coûter?",
+                body: "Le coût dépend des fonctionalitées, l'hébergements, complexités du project. Contactez-nous directement pour un consultation gratuite."
             },
             {
-                title: "What are the payment terms?",
-                body: "We expect our clients to deposit an upfront payment of 40 to 60% of the total amount allocated before project start. 20% of the amount is invoiced when the project is 80% completed, the rest is paid after the project is deployed."
+                title: "C'est quoi les terms de paiement?",
+                body: "Generalement, nous percevons 40 à 60% du montant avant le début du project"
             },
             {
-                title: "What if I don't love your work?",
-                body: "At Bogital, a project is completed only when the client is satisfied. Project prototyping is done at an early stage of the project to make you have a clear picture of the direction the project is taking. At this stage, we will work with you until satisfaction."
+                title: "Et si je n'aime pas votre travail?",
+                body: "Chez Bogital, un projet n’est achevé que lorsque le client est satisfait. Si vous n'aimez pas notre prototype de conception Web, nous travaillerons avec vous pour l'améliorer jusqu'à satisfaction."
             },
             {
-                title: "How to update my website?",
-                body: "We provide a personalised content manager for all the web sites we develop at Bogital Cameroon. This content manager provides a simple interface to update the content of your website.In addition, we build Wordpress websites which are very easy to customise."
+                title: "Comment mettre à jour mon site internet?",
+                body: "Nous fournissons un gestionnaire de contenu personnalisé pour tous les sites Web que nous développons à Bogital Cameroun. Ce gestionnaire de contenu fournit une interface simple pour mettre à jour le contenu de votre site Web. De plus, nous construisons des sites Web Wordpress qui sont très faciles à modifier."
             }
         ]
     }
