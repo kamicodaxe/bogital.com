@@ -27,8 +27,8 @@ const Project: React.FC<Props> = ({ project, slug }) => {
                         {/* <Image src="https://source.unsplash.com/random/420x210" width={420} height={210} className="object-cover" /> */}
                         <img
                             className="object-cover w-full"
-                            src={project.featuredImage.node.sourceUrl}
-                            alt={project.featuredImage.node.altText}
+                            src={project?.featuredImage?.node?.sourceUrl}
+                            alt={project?.featuredImage?.node?.altText}
                         />
                     </motion.div>
 
@@ -49,7 +49,7 @@ const Project: React.FC<Props> = ({ project, slug }) => {
 
                 <div className="flex flex-col flex-1 space-y-4 lg:overflow-y-scroll px-4 sm:pr-12">
 
-                    <div className="prose mx-auto" dangerouslySetInnerHTML={{ __html: project.content || "" }}>
+                    <div className="prose mx-auto" dangerouslySetInnerHTML={{ __html: project?.content || "" }}>
                         {/* <h2 className="text-3xl font-bold text-center">{project?.title.rendered}</h2> */}
                         {/* <p className="font-serif text-sm text-center">Qualisque erroribus usu at, duo te agam soluta mucius.</p> */}
                         {/* <p className=" text-gray-700">
@@ -101,9 +101,10 @@ const strings = {
 
 
 export const getStaticProps: GetStaticProps = async (context) => {
-    const apolloClient = getApolloClient()
-    const data = await apolloClient.query({
-        query: gql`
+    try {
+        const apolloClient = getApolloClient()
+        const data = await apolloClient.query({
+            query: gql`
         query GetProjectBySlug($slug: String = "") {
             projectBy(slug: $slug) {
               projectId
@@ -120,17 +121,28 @@ export const getStaticProps: GetStaticProps = async (context) => {
             }
           }
     `,
-        variables: {
-            slug: context.params?.slug
-        }
-    })
+            variables: {
+                slug: context.params?.slug
+            }
+        })
 
-    return {
-        props: {
-            project: data.data.projectBy as IProjectDataResponse,
-            projects: [],
-            slug: context.params?.slug,
-            revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
+        return {
+            props: {
+                project: data.data.projectBy as IProjectDataResponse,
+                projects: [],
+                slug: context.params?.slug,
+                revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
+            }
+        }
+    } catch (e) {
+        console.error(e)
+        return {
+            props: {
+                project: {},
+                projects: [],
+                slug: context.params?.slug,
+                revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
+            }
         }
     }
 }

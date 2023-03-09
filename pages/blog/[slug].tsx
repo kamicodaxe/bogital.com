@@ -45,6 +45,7 @@ const Blog: React.FC<Props> = ({ article, articles, slug }) => {
 
                     </div>
 
+
                     <div className="pt-12 hidden md:block space-y-4">
                         {
                             articles.map(_item => (
