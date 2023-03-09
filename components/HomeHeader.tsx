@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { useMemo } from "react"
 import NavBar from "./NavBar"
 import Typical from "./Typical"
@@ -40,10 +41,12 @@ const HomeHeader: React.FC<Props> = ({ active, locale }) => {
                         {s.assistance}
                     </p>
                     <div className="flex flex-wrap justify-center z-10">
-                        <button
-                            className="px-8 py-3 m-2 text-lg font-semibold rounded text-white hover:bg-teal-300 bg-teal-400 text-coolGray-900">
-                            {s.invoice}
-                        </button>
+                        <Link href="/contact">
+                            <button
+                                className="px-8 py-3 m-2 text-lg font-semibold rounded text-white hover:bg-teal-300 bg-teal-400 text-coolGray-900">
+                                {s.invoice}
+                            </button>
+                        </Link>
                         <button
                             className="px-8 py-3 m-2 text-lg border rounded text-white hover:bg-teal-400 hover:border-teal-400 text-coolGray-50 border-coolGray-700">
                             {s.more}
