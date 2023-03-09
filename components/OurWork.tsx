@@ -2,23 +2,13 @@ import { motion } from "framer-motion"
 // import Image from "next/image"
 import Link from "next/link"
 import { useMemo } from "react"
-import { IWordpressArticle } from "../lib/wordpress/types"
+import { IProjectDataResponse } from "../lib/graphql"
 
 interface Props {
     locale: string
     title?: string
     isPreview?: boolean,
-    projects: IWordpressArticle[]
-    // projects: {
-    //     title: string,
-    //     desc: string,
-    //     platform: string,
-    //     image: {
-    //         src: string,
-    //         alt: string
-    //     },
-    //     tags: string[]
-    // }[]
+    projects: IProjectDataResponse[]
 }
 
 const Tick = () => (
@@ -29,7 +19,7 @@ const Tick = () => (
 
 const OurWork: React.FC<Props> = ({ locale, title, isPreview, projects }) => {
     const isFr = useMemo(() => locale.toLowerCase().includes('fr'), [locale])
-
+    console.log(projects)
     return (
         <div className="text-gray-900">
             <div className="section">
@@ -47,15 +37,15 @@ const OurWork: React.FC<Props> = ({ locale, title, isPreview, projects }) => {
                     {
                         projects.map((_customer, i) => {
                             return (
-                                <Link className="flex" href={`/projects/${_customer.slug}`} key={_customer.id}>
+                                <Link className="flex" href={`/projects/${_customer.slug}`} key={_customer.slug}>
                                     <div className="flex flex-col cursor-pointer hover:bg-teal-400 hover:text-white">
                                         <motion.figure className="flex" layoutId={"image-" + _customer.slug}>
-                                            <img src={_customer._embedded['wp:featuredmedia'][0].source_url} width={420} height={260} className="object-cover" alt={''} />
+                                            <img src={_customer.featuredImage?.node.sourceUrl} width={420} height={260} className="object-cover" alt={_customer.featuredImage?.node.altText} />
                                         </motion.figure>
 
                                         <div className="ml-2 mt-2">
                                             <motion.dt className="text-lg font-medium" layoutId={"title-" + _customer.slug}>
-                                                <div dangerouslySetInnerHTML={{ __html: _customer.title.rendered }} />
+                                                <h4 className="text-gray-800">{_customer.title}</h4>
                                             </motion.dt>
                                             {/* <dd className="mt-2 text-gray-600">{_customer.desc}</dd> */}
                                         </div>

@@ -1,16 +1,16 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { useMemo } from "react"
-import { IWordpressArticle } from "../lib/wordpress/types"
+import { IPostDataResponse } from "../lib/graphql"
 
 
 interface Props {
     locale: string
-    articles: IWordpressArticle[]
+    articles: IPostDataResponse[]
 }
 
 const BlogPreview: React.FC<Props> = ({ locale, articles }) => {
-
+    console.log(articles)
     const lang = useMemo(() => (locale || '').toLowerCase().includes('fr'), [locale]) ? 'fr' : 'en'
     const s = strings[lang]
 
@@ -25,22 +25,22 @@ const BlogPreview: React.FC<Props> = ({ locale, articles }) => {
                     {
                         articles.map(_item => {
                             return (
-                                <Link key={_item.id} className="flex cursor-pointer" href={`/blog/${_item.slug}`}>
+                                <Link key={_item.slug} className="flex cursor-pointer" href={`/blog/${_item.slug}`}>
                                     <article className="flex flex-col cursor-pointer hover:bg-teal-400 hover:text-white bg-coolGray-900">
                                         <motion.img
                                             className="object-cover w-full h-52 bg-coolGray-500"
-                                            src={_item._embedded['wp:featuredmedia'][0].source_url}
-                                            layoutId={"image-" + _item.id}
+                                            src={_item.featuredImage.node.sourceUrl}
+                                            layoutId={"image-" + _item.featuredImage.node.sourceUrl}
                                         />
                                         {/* <img alt="" className="object-cover w-full h-52 bg-coolGray-500"
                                                 src={_item.image} /> */}
                                         <div className="flex flex-col flex-1 ">
                                             {/* <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a> */}
                                             {/* <span className="text-xs tracking-wider uppercase text-teal-400">{_item.author}</span> */}
-                                            <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">{_item.title.rendered}</h3>
-                                            <div dangerouslySetInnerHTML={{ __html: _item.excerpt.rendered }} />
+                                            <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">{_item.title}</h3>
+                                            <div dangerouslySetInnerHTML={{ __html: _item.excerpt }} />
                                             <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs text-coolGray-400">
-                                                <span>{_item.date}</span>
+                                                {/* <span>{_item.date}</span> */}
                                                 {/* <span>{_item.views} views</span> */}
                                             </div>
                                         </div>

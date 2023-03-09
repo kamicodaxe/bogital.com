@@ -1,13 +1,15 @@
+import { gql } from "@apollo/client"
+import { GetStaticProps } from "next"
 import { useRouter } from "next/router"
 import { useMemo } from "react"
 import Header from "../../components/Header"
 import Layout from "../../components/Layout"
 import OurWork from "../../components/OurWork"
+import { getApolloClient, IProjectDataResponse } from "../../lib/graphql"
 import wordpress from "../../lib/wordpress"
-import { IWordpressArticle } from "../../lib/wordpress/types"
 
 interface Props {
-    projects: IWordpressArticle[]
+    projects: IProjectDataResponse[]
 }
 
 const Projects: React.FC<Props> = ({ projects }) => {
@@ -136,91 +138,45 @@ const strings = {
     }
 }
 
-export const projects = [
-    {
-        title: "Bikoula Complexe",
-        desc: "Librarie",
-        platform: "web",
-        image: {
-            src: '/images/our-work/bikoulacomplexe.jpg',
-            alt: ''
-        },
-        tags: ["Web", 'Tailwind CSS', 'Next JS', 'Node JS']
-    },
-    {
-        title: "Les Artisans d'ici (Côte d'ivoire)",
-        desc: "Restaurant",
-        platform: "web",
-        image: {
-            src: '/images/our-work/artisansdici.jpg',
-            alt: ''
-        },
-        tags: ["Web", 'Tailwind CSS', 'Next JS']
-    },
-    {
-        title: "Fenassco Ligue A, en partenariat avec 3CM Cameroun",
-        desc: "Parfumerie",
-        platform: "web",
-        image: {
-            src: '/images/our-work/fenassco-ligue-a.jpg',
-            alt: ''
-        },
-        tags: ["Web", 'Tailwind CSS', 'Next JS', 'Dato CMS']
-    },
-    {
-        title: "Save App",
-        desc: "Bazar",
-        platform: "web",
-        image: {
-            src: '/images/our-work/saveapp.jpg',
-            alt: ''
-        },
-        tags: ["Web", 'CSS 3', 'AWS', 'Amplify']
-    },
-
-    {
-        title: "Gesmax",
-        desc: "Librarie",
-        platform: "mobile",
-        image: {
-            src: '/images/our-work/gesmax.jpg',
-            alt: ''
-        },
-        tags: ["React Native", "Firebase", "Golang", "Node JS"]
-    },
-    {
-        title: "Save App",
-        desc: "Bazar",
-        platform: "mobile",
-        image: {
-            src: '/images/our-work/saveapp.jpg',
-            alt: ''
-        },
-        tags: ["React Native", "Django", "Node JS"]
-    },
-
-]
-
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async (context) => {
     wordpress.initialiseWordpress()
-    const data = await wordpress.getCollection('projects?_embed') as IWordpressArticle[]
+    const apolloClient = getApolloClient()
+    const data = await apolloClient.query({
+        query: gql`
+        query AllProjectsPreview($language: LanguageCodeFilterEnum = EN, $first: Int = 4) {
+            projects(first: $first, where: {language: $language}) {
+              edges {
+                node {
+                  projectId
+                  slug
+                  uri
+                  title(format: RENDERED)
+                  featuredImage {
+                    node {
+                      altText
+                      caption
+                      title(format: RENDERED)
+                      sourceUrl(size: MEDIUM)
+                    }
+                  }
+                }
+              }
+            }
+          }
+    `,
+        variables: {
+            language: context.locale?.toUpperCase(),
+            first: 10
+        }
+    })
 
     return {
         props: {
-            projects: data,
+            projects: (data.data?.projects?.edges as { node: IProjectDataResponse }[]).map(p => p.node),
             revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
         }
     }
 
 }
-
-// export async function getStaticProps() {
-//     return {
-//         props: {
-//             projects: projects,
-//             revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
-//         }
-//     }
-// }
 
 export default Projects

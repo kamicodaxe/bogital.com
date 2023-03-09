@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useMemo, useState } from "react"
+import { useRouter } from "next/router"
 
 interface Props {
     active: string
@@ -18,6 +18,9 @@ const routes = [
 ]
 
 const NavBar: React.FC<Props> = ({ active, locale }) => {
+    const { locale: activeLocale, locales, asPath } = useRouter()
+
+    const availableLocales = locales?.filter(locale => locale !== activeLocale)
 
     const activeLink = (routeName: string) => {
         // TODO: Use classnames from npm
@@ -26,13 +29,6 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
         // isActive ? alert("Active " + routeName) : alert("Inactive " + routeName)
         if (isActive) return 'p-2 px-4 border-b-2 text-teal-400 border-teal-400'
         return 'p-2 px-4 border-b-2 border-transparent text-white hover:text-teal-400 hover:border-teal-400'
-    }
-
-    const isFrench = useMemo(() => locale.toLowerCase().includes('fr'), [locale])
-    const [isActive, setIsAvtice] = useState(false)
-
-    const toggleMenu = () => {
-        setIsAvtice(v => !v)
     }
 
     function showMenu() {
@@ -51,13 +47,7 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
         }
     }
 
-    // <li className={activeLink('pricing')}>
-    //     <Link href='/pricing' className="flex items-center -mb-1">
-    //         <span className="">
-    //             {isFrench ? 'Coûts' : 'Pricing'}
-    //         </span>
-    //     </Link>
-    // </li>
+
 
     return (
         <div className="w-full fixed z-50">
@@ -111,19 +101,19 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
                             <div id="drop-down"
                                 className="absolute right-0 z-20 mt-2 hidden overflow-hidden bg-white rounded-md shadow-lg w-80 dark:bg-gray-800">
                                 <div className="py-2">
-                                    <a href="#"
-                                        className="flex items-center px-4 py-3 -mx-2 transition-colors duration-200 transform border-b border-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700 dark:border-gray-700">
-                                        <p className="mx-2 text-sm text-gray-600 dark:text-white"><span className="font-bold" />
-                                            English
-                                        </p>
-                                    </a>
-                                    <a href="#"
-                                        className="flex items-center px-4 py-3 -mx-2 transition-colors duration-200 transform hover:bg-gray-50 dark:hover:bg-gray-700 dark:border-gray-700">
+                                    {
+                                        availableLocales?.map(
+                                            _locale => (
+                                                <Link key={_locale} href={asPath}
+                                                    className="flex items-center px-4 py-3 -mx-2 transition-colors duration-200 transform border-b border-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700 dark:border-gray-700">
+                                                    <p className="mx-2 text-sm text-gray-600 dark:text-white"><span className="font-bold" />
+                                                        {_locale.toUpperCase()}
+                                                    </p>
+                                                </Link>
+                                            )
+                                        )
+                                    }
 
-                                        <p className="mx-2 text-sm text-gray-600 dark:text-white"><span className="font-bold" />
-                                            Français
-                                        </p>
-                                    </a>
                                 </div>
                             </div>
                         </div>

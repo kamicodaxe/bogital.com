@@ -1,3 +1,4 @@
+import { gql } from "@apollo/client"
 import { motion } from "framer-motion"
 import { GetStaticProps } from "next"
 import Link from "next/link"
@@ -5,6 +6,7 @@ import { useRouter } from "next/router"
 import { useMemo } from "react"
 import Header from "../../components/Header"
 import Layout from "../../components/Layout"
+import { getApolloClient } from "../../lib/graphql"
 import wordpress from "../../lib/wordpress"
 import { IWordpressArticle } from "../../lib/wordpress/types"
 
@@ -16,7 +18,6 @@ const Blog: React.FC<Props> = ({ articles }) => {
     const { locale } = useRouter()
     const lang = useMemo(() => (locale || '').toLowerCase().includes('fr'), [locale]) ? 'fr' : 'en'
     const s = strings[lang]
-    console.log(articles)
 
     return (
         <Layout locale={locale as string} title={s?.title} desc={s?.desc}>
@@ -25,7 +26,7 @@ const Blog: React.FC<Props> = ({ articles }) => {
                 <div className="container p-6 mx-auto space-y-8">
                     <div className="space-y-2 text-center">
                         <h2 className="text-3xl font-bold">Actualités, Articles...</h2>
-                        <p className="font-serif text-sm text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
+                        {/* <p className="font-serif text-sm text-coolGray-400">Qualisque erroribus usu at, duo te agam soluta mucius.</p> */}
                     </div>
                     <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
                         {
@@ -124,7 +125,44 @@ const strings = {
 
 export const getStaticProps: GetStaticProps = async (context) => {
     wordpress.initialiseWordpress()
-    const data = await wordpress.getCollection(`posts?lang=${context.locale}&_embed`) as IWordpressArticle[]
+    // const data = await wordpress.getCollection(`posts?lang=${context.locale}&_embed`) as IWordpressArticle[]
+
+    const apolloClient = getApolloClient()
+    const data = await apolloClient.query({
+        query: gql`
+        query GetPostBySlug($slug: String = "") {
+            postBy(slug: $slug) {
+              id
+              postId
+              title(format: RENDERED)
+              slug
+              excerpt(format: RENDERED)
+              featuredImage {
+                node {
+                  altText
+                  sourceUrl(size: MEDIUM_LARGE)
+                }
+              }
+              content(format: RENDERED)
+              translations {
+                id
+                postId
+                slug
+                uri
+                link
+                language {
+                  code
+                  locale
+                }
+              }
+            }
+          }
+    `,
+        variables: {
+            slug: ''
+        }
+    })
+
 
     return {
         props: {
