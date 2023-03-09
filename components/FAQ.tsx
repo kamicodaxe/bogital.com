@@ -12,8 +12,8 @@ const FAQ: React.FC<Props> = ({ locale }) => {
     return (
         <section className="bg-teal-800 text-gray-100">
             <div className="container flex flex-col justify-center p-4 mx-auto md:p-8">
-                <p className="p-2 text-sm font-medium tracking-wider text-center uppercase text-white">How it works</p>
-                <h2 className="mb-12 text-4xl font-bold leading-none text-center sm:text-5xl text-white">Frequently Asked Questions</h2>
+                <p className="p-2 text-sm font-medium tracking-wider text-center uppercase text-white">{s.title}</p>
+                <h2 className="mb-12 text-4xl font-bold leading-none text-center sm:text-5xl text-white">{s.subtitle}</h2>
                 <div className="grid gap-10 md:gap-8 sm:p-3 md:grid-cols-2 lg:px-12 xl:px-32">
                     {
                         s.items.map(_item => (
@@ -33,6 +33,8 @@ const FAQ: React.FC<Props> = ({ locale }) => {
 
 const strings = {
     'en': {
+        title: "How it works?",
+        subtitle: "Frequently asked questions",
         items: [
             {
                 title: "How much will it cost me?",
@@ -53,6 +55,8 @@ const strings = {
         ]
     },
     'fr': {
+        title: "Comment ça marche?",
+        subtitle: "Questions frequenment demandée",
         items: [
             {
                 title: "How much will it cost me?",

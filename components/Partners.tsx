@@ -1,16 +1,23 @@
+import { useMemo } from 'react'
+interface Props {
+    locale: string
+}
 
-const Partners: React.FC<{}> = ({ }) => {
-
+const Partners: React.FC<Props> = ({ locale }) => {
+    const lang = useMemo(() => (locale || '').toLowerCase().includes('fr'), [locale]) ? 'fr' : 'en'
     return (
         <div className="container mx-auto">
             <div className="section w-11/12 xl:w-2/3 lg:w-2/3 md:w-2/3 mx-auto sm:mb-10 mb-16">
                 <h2 tabIndex={0}
                     className="heading">
-                    Partnerships</h2>
-                <p tabIndex={0}
+                    {
+                        lang == "fr" ? "Nos partenaires" : "Partnerships"
+                    }
+                </h2>
+                {/* <p tabIndex={0}
                     className="focus:outline-none text-base md:text-lg lg:text-xl text-center text-gray-600 font-normal xl:w-10/12 xl:mx-auto">
                     Our success has come from being committed to the property and investing in the development of the product to
-                    maximize sales. At the same time and maintaining the integrity.</p>
+                    maximize sales. At the same time and maintaining the integrity.</p> */}
             </div>
             <div className="xl:py-16 lg:py-16 md:py-16 sm:py-16 px-15 flex flex-wrap">
                 <div

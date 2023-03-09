@@ -7,7 +7,6 @@ import BlogPreview from "../../components/BlogPreview"
 import Header from "../../components/Header"
 import Layout from "../../components/Layout"
 import { getApolloClient, IPostDataResponse } from "../../lib/graphql"
-import wordpress from "../../lib/wordpress"
 
 interface Props {
     article: IPostDataResponse,
@@ -93,7 +92,6 @@ const strings = {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-    wordpress.initialiseWordpress()
     const apolloClient = getApolloClient()
     const data = await apolloClient.query({
         query: gql`

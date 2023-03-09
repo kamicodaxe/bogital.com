@@ -19,7 +19,6 @@ const Tick = () => (
 
 const OurWork: React.FC<Props> = ({ locale, title, isPreview, projects }) => {
     const isFr = useMemo(() => locale.toLowerCase().includes('fr'), [locale])
-    console.log(projects)
     return (
         <div className="text-gray-900">
             <div className="section">
@@ -29,13 +28,13 @@ const OurWork: React.FC<Props> = ({ locale, title, isPreview, projects }) => {
                 </div> */}
                 {
                     isPreview ?
-                        <h3 className="heading"> {title || "They trusted us - our favorites"} </h3>
+                        <h3 className="heading"> {title || (isFr ? "Ils nous ont fait confiance" : "They trusted us - our favorites")} </h3>
                         :
-                        <h3 className="text-xl font-extrabold sm:text-2xl">Our favorites</h3>
+                        <h3 className="text-xl font-extrabold sm:text-2xl">{""}</h3>
                 }
                 <dl className="mt-4 space-y-10 sm:space-y-0 grid-cols-1 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-8">
                     {
-                        projects.map((_customer, i) => {
+                        projects?.map((_customer, i) => {
                             return (
                                 <Link className="flex" href={`/projects/${_customer.slug}`} key={_customer.slug}>
                                     <div className="flex flex-col cursor-pointer hover:bg-teal-400 hover:text-white">

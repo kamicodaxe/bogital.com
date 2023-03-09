@@ -4,7 +4,6 @@ import { useRouter } from "next/router"
 import { useMemo } from "react"
 import Header from "../../components/Header"
 import Layout from "../../components/Layout"
-import OurWork from "../../components/OurWork"
 import { getApolloClient, IProjectDataResponse } from "../../lib/graphql"
 import wordpress from "../../lib/wordpress"
 
@@ -17,12 +16,10 @@ const Projects: React.FC<Props> = ({ projects }) => {
     const lang = useMemo(() => (locale || '').toLowerCase().includes('fr'), [locale]) ? 'fr' : 'en'
     const s = strings[lang]
 
-    console.log(projects)
-
     return (
         <Layout locale={locale as string} title={s.title} desc={s.desc}>
             <Header locale={locale as string} title="Projects" active='projects' className="bg-[url(https://source.unsplash.com/2zDXqgTzEFE/1200x720)]" />
-            <OurWork locale={locale as string} projects={projects} />
+            {/* <OurWork locale={locale as string} projects={projects} /> */}
         </Layout>
     )
 }

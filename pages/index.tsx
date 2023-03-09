@@ -22,13 +22,13 @@ const Home: NextPage<IHomePageData> = ({ data: { projects, posts } }) => {
   return (
     <Layout locale={locale as string} title={title} desc={desc}>
       <HomeHeader locale={locale as string} active="home" />
-      <OurWork isPreview locale={locale as string} projects={projects.edges.map(p => p.node)} />
-      <Partners />
+      <OurWork isPreview locale={locale as string} projects={projects?.edges?.map(p => p.node) || []} />
+      <Partners locale={locale as string} />
       <CTA />
-      <Services />
+      <Services locale={locale as string} />
       <Process locale={locale as string} />
       <FAQ locale={locale as string} />
-      <BlogPreview locale={locale as string} articles={posts.edges.map(p => p.node)} />
+      <BlogPreview isPreview locale={locale as string} articles={posts?.edges?.map(p => p.node) || []} />
       <JoinNewsLetter locale={locale as string} />
     </Layout>
   )
@@ -40,53 +40,67 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const params = "&per_page=4"
 
   const apolloClient = getApolloClient()
-  const data = await apolloClient.query({
-    query: gql`
-    query AllHomePageData($language: LanguageCodeFilterEnum = ${context.locale?.toUpperCase()}) {
-      projects(where: {language: $language}, first: 4) {
-        edges {
-          node {
-            projectId
-            slug
-            uri
-            title(format: RENDERED)
-            featuredImage {
-              node {
-                altText
-                caption
-                title(format: RAW)
-                sourceUrl(size: MEDIUM)
+  try {
+    const data = await apolloClient.query({
+      query: gql`
+      query AllHomePageData($language: LanguageCodeFilterEnum = ${context.locale?.toUpperCase()}) {
+        projects(where: {language: $language}, first: 4) {
+          edges {
+            node {
+              projectId
+              slug
+              uri
+              title(format: RENDERED)
+              featuredImage {
+                node {
+                  altText
+                  caption
+                  title(format: RAW)
+                  sourceUrl(size: MEDIUM)
+                }
               }
+            }
+          }
+        }
+        posts(where: {language: $language}, first: 4) {
+          edges {
+            node {
+              postId
+              slug
+              uri
+              title(format: RENDERED)
+              featuredImage {
+                node {
+                  altText
+                  caption(format: RAW)
+                  sourceUrl(size: MEDIUM)
+                }
+              }
+              excerpt
             }
           }
         }
       }
-      posts(where: {language: $language}, first: 4) {
-        edges {
-          node {
-            postId
-            slug
-            uri
-            title(format: RENDERED)
-            featuredImage {
-              node {
-                altText
-                caption(format: RAW)
-                sourceUrl(size: MEDIUM)
-              }
-            }
-            excerpt
-          }
-        }
+      `
+    }) as unknown as IHomePageData
+
+    return {
+      props: {
+        ...data,
+        revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
       }
     }
-    `
-  }) as unknown as IHomePageData
-
-  return {
-    props: {
-      ...data,
-      revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
+  } catch (e) {
+    console.warn(e)
+    return {
+      props: {
+        error: 'server error',
+        data: {
+          projects: [],
+          posts: []
+        },
+        revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
+      }
     }
   }
 }
