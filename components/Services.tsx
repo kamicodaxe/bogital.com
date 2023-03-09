@@ -82,15 +82,15 @@ const strings = {
                     src: "/images/services/fa-html5.svg",
                     alt: ""
                 },
-                body: "Your web site scales up or down depending if you view your website on a small smartphone, tablet or desktop computer. Responsive web design enhances the user experience, especially on mobile phones. All our web designs are responsive at Bogital."
+                body: "Votre site Web s’agrandit ou diminue en fonction de la taille de votre écran. Il existe une vue smartphone, tablette ou bureau. La conception Web réactive améliore l'expérience utilisateur, en particulier sur les téléphones mobiles. Toutes nos conceptions Web sont réactives chez Bogital."
             },
             {
-                title: "Application mobile",
+                title: "Développement d'applications mobiles",
                 image: {
                     src: "/images/services/fa-mobile-phone.svg",
                     alt: ""
                 },
-                body: "We use top-notch technologies to develop modern mobile applications across ios and android. We will follow your mobile application project throughout its lifespan."
+                body: "Nous utilisons des technologies haut de gamme pour développer des applications mobiles modernes à travers iOS et Android. Nous suivrons votre projet d'application mobile tout au long de sa vie."
             },
             {
                 title: "Wordpress",
@@ -98,15 +98,15 @@ const strings = {
                     src: "/images/services/fa-wordpress.svg",
                     alt: ""
                 },
-                body: "We develop a custom Wordpress websites and themes. At bogital, We will build your Wordpress site from scratch giving you the unique web design you deserve."
+                body: "Nous développons des sites Web et des thèmes Wordpress personnalisés. Chez bogital, nous construirons votre site Wordpress à partir de zéro en vous donnant le site web unique que vous méritez."
             },
             {
-                title: "Réferencements sur les moteurs de recherces",
+                title: "Référencements sur les moteurs de recherches",
                 image: {
                     src: "/images/services/fa-globe.svg",
                     alt: ""
                 },
-                body: "We build SEO friendly websites scoring A grades on page test. This will help rank Your website on search engines like google and bing more rapidly."
+                body: "Nous construisons des sites Web idéals pour le référencement naturel de votre site internet au Cameroun. Cela vous aidera à classer plus rapidement votre site Web sur les moteurs de recherche tels que Google et Bing."
             },
         ]
     }

@@ -56,23 +56,23 @@ const strings = {
     },
     'fr': {
         title: "Comment ça marche?",
-        subtitle: "Questions frequenment demandée",
+        subtitle: "Questions fréquemment posées",
         items: [
             {
                 title: "Combien ça va me coûter?",
-                body: "Le coût dépend des fonctionalitées, l'hébergements, complexités du project. Contactez-nous directement pour un consultation gratuite."
+                body: "Le coût dépend des fonctionnalités, les hébergements, complexités du projet. Contactez-nous directement pour une consultation gratuite."
             },
             {
-                title: "C'est quoi les terms de paiement?",
+                title: "Quels sont les termes de paiement ?",
                 body: "Generalement, nous percevons 40 à 60% du montant avant le début du project"
             },
             {
-                title: "Et si je n'aime pas votre travail?",
+                title: "Vous n'aimez pas notre travail?",
                 body: "Chez Bogital, un projet n’est achevé que lorsque le client est satisfait. Si vous n'aimez pas notre prototype de conception Web, nous travaillerons avec vous pour l'améliorer jusqu'à satisfaction."
             },
             {
-                title: "Comment mettre à jour mon site internet?",
-                body: "Nous fournissons un gestionnaire de contenu personnalisé pour tous les sites Web que nous développons à Bogital Cameroun. Ce gestionnaire de contenu fournit une interface simple pour mettre à jour le contenu de votre site Web. De plus, nous construisons des sites Web Wordpress qui sont très faciles à modifier."
+                title: "Comment mettre à jour votre site internet ?",
+                body: "Nous fournissons un gestionnaire de contenu personnalisé pour tous les sites Web que nous développons à Bogital Cameroun. Ce gestionnaire de contenu fournit une interface simple pour mettre à jour le contenu de votre site Web. De plus, nous construisons des sites web avec Wordpress qui sont très faciles à modifier."
             }
         ]
     }

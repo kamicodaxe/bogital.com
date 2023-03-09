@@ -25,7 +25,12 @@ const HomeHeader: React.FC<Props> = ({ active, locale }) => {
                         <span className="text-teal-400">
                             <span> </span>
                             <Typical
-                                steps={['Websites.', 1500, 'Mobile Applications.', 1500, 'the world.', 1500, 'it for you!', 2500]}
+                                steps={
+                                    lang == "en" ?
+                                        ['Websites.', 1500, 'Mobile Applications.', 1500, 'the world.', 1500, 'it with you!', 2500]
+                                        :
+                                        ['des sites internet.', 1500, 'des applications mobiles.', 1500, 'le monde avec vous.', 5500]
+                                }
                                 loop={Infinity}
                                 wrapper="span"
                             />
@@ -63,7 +68,7 @@ const strings = {
     'fr': {
         title: "Project - Article",
         desc: "Bogital Project - Latest Tech news in Africa",
-        WeBuild: "Nous conçevons ",
+        WeBuild: "Nous concevons ",
         assistance: "Nous vous accompagnons dans la digitalisation de votre activité.",
         invoice: "Demandez un devis",
         more: "En savoir plus",

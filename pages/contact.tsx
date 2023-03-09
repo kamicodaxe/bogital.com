@@ -85,6 +85,7 @@ const Contact: NextPage<Props> = ({ data }) => {
             </label>
 
             <input type="hidden" name="_next" value="https://bogital.com"></input>
+            <input type="hidden" name="_email" value="lkmami@bogital.com"></input>
 
             <button type="submit"
               className="self-center px-8 py-3 text-lg rounded focus:ring hover:ring focus:ring-opacity-75 bg-teal-400 text-white focus:ring-teal-400 hover:ring-violet-400">

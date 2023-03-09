@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { useRouter } from "next/router"
 import { useMemo } from "react"
 
@@ -14,10 +15,13 @@ const CTA: React.FC<{}> = ({ }) => {
                 </h2>
 
                 <div className="py-4"></div>
-                <button type="button"
+                <Link type="button" href='/contact'
                     className="px-8 py-3 m-2 text-lg border rounded text-white bg-teal-400 border-teal-400 hover:bg-teal-500 hover:border-teal-500  text-coolGray-50 border-coolGray-700">
-                    {s.quote}
-                </button>
+                    <button type="button"
+                        className="px-8 py-3 m-2 text-lg border rounded text-white bg-teal-400 border-teal-400 hover:bg-teal-500 hover:border-teal-500  text-coolGray-50 border-coolGray-700">
+                        {s.quote}
+                    </button>
+                </Link>
             </div>
         </div>
     )
