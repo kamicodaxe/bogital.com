@@ -53,33 +53,40 @@ const Contact: NextPage<Props> = ({ data }) => {
           <form
             // noalidate=""
             className="flex flex-col py-6 space-y-6 md:py-0 md:px-6"
-            action="https://formsubmit.co/contact@bogital.com" method="POST"
+            action="https://www.bogital.com/api/form" method="POST"
           >
             <label className="block">
               <span className="mb-1">{s.name}</span>
-              <input type="text" placeholder="Leroy Jenkins"
+              <input name="name" type="text" placeholder="Loïc Kami"
                 className="block w-full rounded-md shadow-sm py-2 bg-coolGray-800 border-b focus:border-teal-400 focus:outline-none" />
             </label>
             <label className="block">
               <span className="mb-1">{s.phone}</span>
-              <input type="phone" placeholder="(+1) 512 4587 6321"
+              <input name="phone" type="phone" placeholder="(+237) 6XX XXX XXX"
                 className="block w-full rounded-md py-2 bg-coolGray-800 border-b focus:border-teal-400 focus:outline-none" />
             </label>
             <label className="block">
               <span className="mb-1">{s.email}</span>
-              <input type="email" placeholder="leroy@jenkins.com"
+              <input name="email" type="email" placeholder="loic@kami.com"
                 className="block w-full rounded-md shadow-sm py-2 focus:ring-teal-400 bg-coolGray-800 border-b focus:border-teal-400 focus:outline-none" />
             </label>
             <label className="block">
+              <span className="mb-1">{s.subject}</span>
+              <select name='_subject' className='block w-full rounded-md shadow-sm py-2 focus:ring-teal-400 bg-coolGray-800 border-b focus:border-teal-400 focus:outline-none'>
+                {
+                  s.subjects.map(title => <option key={title} value={title}>{title}</option>)
+                }
+              </select>
+            </label>
+            <label className="block">
               <span className="mb-1">{s.message}</span>
-              <textarea rows={5}
+              <textarea name="message" rows={5}
                 className="block w-full rounded-md shadow-sm focus:ring-teal-400 bg-coolGray-800 border-b focus:border-teal-400 focus:outline-none"></textarea>
             </label>
 
-            <input type="hidden" name="_next" value="https://Bogital.net"></input>
-            <input type="hidden" name="_subject" value="New submission! Bogital"></input>
+            <input type="hidden" name="_next" value="https://bogital.com"></input>
 
-            <button type="button"
+            <button type="submit"
               className="self-center px-8 py-3 text-lg rounded focus:ring hover:ring focus:ring-opacity-75 bg-teal-400 text-white focus:ring-teal-400 hover:ring-violet-400">
               {s.getInTouch}
             </button>
@@ -105,7 +112,9 @@ const strings = {
     'email': 'Email address',
     'message': 'Message',
     'getInTouch': 'get in touch',
-    'fillForm': "Fill in the form to start a conversation"
+    'fillForm': "Fill in the form to start a conversation",
+    subject: "Suject",
+    subjects: ["website", "Mobile application", "Website and mobile application", "Wordpress", "Entreprise", "Intenships", "Something else"]
   },
   'fr': {
     'title': 'Contactez-nous, Bogital By Bogital',
@@ -118,7 +127,9 @@ const strings = {
     'email': 'Adresse courriel',
     'message': 'Message',
     'getInTouch': 'contactez-nous',
-    'fillForm': "Veuillez remplir le formulaire"
+    'fillForm': "Veuillez remplir le formulaire",
+    subject: "Sujet",
+    subjects: ["Site internet", "Application mobile", "Site internet et application mobile", "Wordpress", "Entreprise", "Stages", "Autres"]
   },
 }
 
