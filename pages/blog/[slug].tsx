@@ -178,7 +178,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
     })
 
     return {
-        paths: (data.data.projects.edges as { node: IPostDataResponse }[]).map($ => ({ 'params': { slug: $.node.slug } })), //OK
+        paths: (data.data.posts.edges as { node: IPostDataResponse }[]).map($ => ({ 'params': { slug: $.node.slug } })), //OK
         fallback: 'blocking'
     }
 
