@@ -28,7 +28,7 @@ export default async function handler(
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
-        from: `"Bogital Forms" <${req.body._email}>`,
+        from: `"Bogital Forms" <${req.body.email}>`,
         to: req.body._email,
         subject: req.body._subject,
         text: "",
