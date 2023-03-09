@@ -76,26 +76,10 @@ const strings = {
     'en': {
         title: "Project - Article",
         desc: "Bogital Project - Latest Tech news in Africa",
-        article: {
-            title: "How much will it cost me?",
-            author: "Bogital",
-            image: "https://source.unsplash.com/200x200/?techology?1",
-            date: "June 3, 2020",
-            views: "2.4k",
-            body: "The cost depends on many factors. These factors may include; the number of pages, technologies used in the backend, hosting, private emails, design complexity, client skills etc...Write to us directly from our rapid contact form or call us(696835158) directly."
-        }
     },
     'fr': {
         title: "Project - Article",
         desc: "Bogital Project - Latest Tech news in Africa",
-        article: {
-            title: "How much will it cost me?",
-            author: "Bogital",
-            image: "https://source.unsplash.com/200x200/?techology?1",
-            date: "June 3, 2020",
-            views: "2.4k",
-            body: "The cost depends on many factors. These factors may include; the number of pages, technologies used in the backend, hosting, private emails, design complexity, client skills etc...Write to us directly from our rapid contact form or call us(696835158) directly."
-        }
     }
 }
 
