@@ -10,6 +10,7 @@ interface Props extends React.PropsWithChildren {
     locale: string
     title: string
     desc: string
+    imgSrc?: string
     hideFooter?: boolean
 }
 
@@ -17,7 +18,7 @@ interface Props {
     locale: string
 }
 
-const Layout: React.FC<Props> = ({ children, locale, title, desc, hideFooter }) => {
+const Layout: React.FC<Props> = ({ children, locale, title, desc, hideFooter, imgSrc }) => {
     const isFr = useMemo(() => locale.toLowerCase().includes('fr'), [locale])
     const lang = isFr ? 'fr_FR' : 'en_US'
     const siteName = isFr ? "Bogital - Nous vous accompagnons dans la digitalisation de votre activité." : "Bogital - We build software to make your life easier"
@@ -37,12 +38,12 @@ const Layout: React.FC<Props> = ({ children, locale, title, desc, hideFooter }) 
                 <meta property="og:title" content={title} />
                 <meta property="og:description" content={desc} />
                 {/* <meta property="og:url" content="http://fenassco.com/" /> */}
-                <meta property="og:image" content="/favicon.png" />
-                <meta property="og:image:secure_url" content="/favicon.png" />
+                <meta property="og:image" content={imgSrc || "/favicon.png"} />
+                <meta property="og:image:secure_url" content={imgSrc || "/favicon.png"} />
                 <meta name="twitter:card" content="summary" />
                 <meta name="twitter:title" content={title} />
                 <meta name="twitter:description" content={desc} />
-                <meta name="twitter:image" content="/favicon.png" />
+                <meta name="twitter:image" content={imgSrc || "/favicon.png"} />
             </Head>
 
             {children}
