@@ -57,8 +57,8 @@ const Layout: React.FC<Props> = ({ children, locale, title, desc, hideFooter, im
             />
             {
                 title !== "Contact" && <TawkMessengerReact
-                    propertyId="64064e8131ebfa0fe7f10821"
-                    widgetId="1gqsa5aj9" />
+                    propertyId={lang == "fr_FR" ? "640bb38331ebfa0fe7f1e236" : "64064e8131ebfa0fe7f10821"}
+                    widgetId={lang == "fr_FR" ? "1gr6rbmpp" : "1gqsa5aj9"} />
             }
         </div>
     )
