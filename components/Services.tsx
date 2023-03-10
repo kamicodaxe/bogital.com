@@ -52,7 +52,7 @@ const strings = {
                     src: "/images/services/fa-mobile-phone.svg",
                     alt: ""
                 },
-                body: "We use top-notch technologies to develop modern mobile applications across ios and android. We will follow your mobile application project throughout its lifespan."
+                body: "We use React Native to develop modern mobile applications across ios and android. We will follow your mobile application project throughout its lifespan."
             },
             {
                 title: "Wordpress Development",
@@ -90,7 +90,7 @@ const strings = {
                     src: "/images/services/fa-mobile-phone.svg",
                     alt: ""
                 },
-                body: "Nous utilisons des technologies haut de gamme pour développer des applications mobiles modernes à travers iOS et Android. Nous suivrons votre projet d'application mobile tout au long de sa vie."
+                body: "Nous utilisons React Native pour développer des applications mobiles modernes à travers iOS et Android. Nous suivrons votre projet d'application mobile tout au long de sa vie."
             },
             {
                 title: "Wordpress",

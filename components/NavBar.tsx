@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { useMemo } from "react"
 
 interface Props {
     active: string
@@ -8,11 +9,17 @@ interface Props {
 
 const routes = [
     {
-        name: "Our Work",
+        name: {
+            en: "Our Work",
+            fr: "Projets"
+        },
         path: "/projects"
     },
     {
-        name: "Blog",
+        name: {
+            en: "Blog",
+            fr: "Blog",
+        },
         path: "/blog"
     }
 ]
@@ -21,6 +28,7 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
     const { locale: activeLocale, locales, asPath } = useRouter()
 
     const availableLocales = locales?.filter(locale => locale !== activeLocale)
+    const lang = useMemo(() => (locale || '').toLowerCase().includes('fr'), [locale]) ? 'fr' : 'en'
 
     const activeLink = (routeName: string) => {
         // TODO: Use classnames from npm
@@ -67,7 +75,7 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
                                 <Link href={_page.path}
                                     className="flex items-center">
                                     <span className={activeLink(_page.path)}>
-                                        {_page.name}
+                                        {_page.name[lang]}
                                     </span>
                                 </Link>
                             </li>
@@ -81,7 +89,7 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
                         <Link href="/contact/"
                             className="flex items-center">
                             <span className="">
-                                Contact Us
+                                {lang == "en" ? "Contact Us" : "Contactez-nous"}
                             </span>
                         </Link>
                     </button>

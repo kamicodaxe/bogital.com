@@ -45,7 +45,6 @@ const Blog: React.FC<Props> = ({ article, articles, slug }) => {
 
                     </div>
 
-
                     <div className="pt-12 hidden md:block space-y-4">
                         {
                             articles.map(_item => (
@@ -53,7 +52,7 @@ const Blog: React.FC<Props> = ({ article, articles, slug }) => {
                                     <article className="flex cursor-pointer items-center hover:bg-teal-400 hover:text-white bg-coolGray-900">
                                         <img
                                             className="object-cover w-16 h-16 bg-coolGray-500"
-                                            src={_item.featuredImage.node.sourceUrl}
+                                            src={_item?.featuredImage?.node?.sourceUrl}
                                             alt=""
                                         />
                                         <div className="px-2">

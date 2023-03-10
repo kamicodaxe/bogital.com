@@ -72,7 +72,7 @@ const strings = {
             },
             {
                 title: "Comment mettre à jour votre site internet ?",
-                body: "Nous fournissons un gestionnaire de contenu personnalisé pour tous les sites Web que nous développons à Bogital Cameroun. Ce gestionnaire de contenu fournit une interface simple pour mettre à jour le contenu de votre site Web. De plus, nous construisons des sites web avec Wordpress qui sont très faciles à modifier."
+                body: "Nous fournissons un gestionnaire de contenu personnalisé pour tous les sites web que nous développons à Bogital Cameroun. Ce gestionnaire de contenu fournit une interface simple pour mettre à jour le contenu de votre site Web. De plus, nous construisons des sites web avec Wordpress qui sont très faciles à modifier."
             }
         ]
     }

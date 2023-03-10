@@ -1,22 +1,31 @@
 import Link from "next/link"
-
+import { useMemo } from "react"
 const routes = [
     {
-        name: "Our Work",
+        name: {
+            en: "Our Work",
+            fr: "Projets"
+        },
         path: "/projects"
     },
     {
-        name: "Blog",
+        name: {
+            en: "Blog",
+            fr: "Blog",
+        },
         path: "/blog"
     },
     {
-        name: "Contact",
+        name: {
+            en: "Contact",
+            fr: "Contact",
+        },
         path: "/contact"
     }
 ]
 
-const Footer: React.FC<{}> = ({ }) => {
-
+const Footer: React.FC<{ locale: string }> = ({ locale }) => {
+    const lang = useMemo(() => (locale || '').toLowerCase().includes('fr'), [locale]) ? 'fr' : 'en'
     return (
         <footer className="px-4 pt-8 text-gray-800">
             <div className="container flex flex-wrap items-center justify-center mx-auto space-y-4 sm:justify-between sm:space-y-0">
@@ -36,10 +45,10 @@ const Footer: React.FC<{}> = ({ }) => {
                     <ul className="flex flex-wrap items-center space-x-4 sm:space-x-8">
                         {
                             routes.map(route => (
-                                <li key={route.name} className="cursor-pointer">
+                                <li key={route.path} className="cursor-pointer">
                                     <Link href={route.path}>
                                         <span className="px-4">
-                                            {route.name}
+                                            {route.name[lang]}
                                         </span>
                                     </Link>
                                 </li>
