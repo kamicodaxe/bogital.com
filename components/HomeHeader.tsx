@@ -64,7 +64,7 @@ const strings = {
         title: "Project - Article",
         desc: "Bogital Project - Latest Tech news in Africa",
         WeBuild: "We build",
-        assistance: "We bring our business to the web",
+        assistance: "We bring your business to the web",
         invoice: "Request a quote",
         more: "More",
     },
