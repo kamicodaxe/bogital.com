@@ -134,6 +134,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
                       sourceUrl(size: THUMBNAIL)
                     }
                   }
+                  excerpt(format: RENDERED)
                 }
               }
             }

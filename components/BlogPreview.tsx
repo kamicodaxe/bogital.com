@@ -39,15 +39,15 @@ const BlogPreview: React.FC<Props> = ({ locale, articles, isPreview }) => {
                                         />
                                         {/* <img alt="" className="object-cover w-full h-52 bg-coolGray-500"
                                                 src={_item.image} /> */}
-                                        <div className="flex flex-col flex-1 ">
+                                        <div className="flex flex-col flex-1">
                                             {/* <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a> */}
                                             {/* <span className="text-xs tracking-wider uppercase text-teal-400">{_item.author}</span> */}
-                                            <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">{_item.title}</h3>
+                                            <h3 className="py-2 text-lg font-semibold leading-snug">{_item.title}</h3>
                                             <div dangerouslySetInnerHTML={{ __html: _item.excerpt }} />
-                                            <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs text-coolGray-400">
-                                                {/* <span>{_item.date}</span> */}
-                                                {/* <span>{_item.views} views</span> */}
-                                            </div>
+                                            {/* <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs text-coolGray-400"> */}
+                                            {/* <span>{_item.date}</span> */}
+                                            {/* <span>{_item.views} views</span> */}
+                                            {/* </div> */}
                                         </div>
                                     </article>
                                 </Link>
@@ -66,36 +66,10 @@ const strings = {
     'en': {
         title: 'Articles',
         subtitle: '',
-        items: [
-            {
-                title: "How much will it cost me?",
-                author: "Bogital",
-                image: {
-                    src: "/images/blog/why-website.jpg",
-                    alt: ''
-                },
-                date: "June 3, 2020",
-                views: "2.4k",
-                body: "The cost depends on many factors. These factors may include; the number of pages, technologies used in the backend, hosting, private emails, design complexity, client skills etc...Write to us directly from our rapid contact form or call us(696835158) directly."
-            }
-        ]
     },
     'fr': {
         title: 'Articles',
         subtitle: '',
-        items: [
-            {
-                title: "How much will it cost me?",
-                author: "Bogital",
-                image: {
-                    src: "/images/blog/why-website.jpg",
-                    alt: ''
-                },
-                date: "June 3, 2020",
-                views: "2.4k",
-                body: "The cost depends on many factors. These factors may include; the number of pages, technologies used in the backend, hosting, private emails, design complexity, client skills etc...Write to us directly from our rapid contact form or call us(696835158) directly."
-            }
-        ]
     }
 }
 
