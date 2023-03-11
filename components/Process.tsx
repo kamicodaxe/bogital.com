@@ -51,15 +51,15 @@ const strings = {
         items: [
             {
                 title: "Project Analysis",
-                body: "This is where we will decide which technology sack to use for your web design or mobile application project. Project analysis can take up to 4 weeks to complete."
+                body: "This is where we will decide which technology sack to use for your web design or mobile application project."
             },
             {
                 title: "Prototyping",
-                body: "After analysing the project, we will produce a prototype of the project that will be validated by the client before we go further. Prototyping can take between one week and 6 weeks depending on the project."
+                body: "After analysing the project, we will produce a prototype of the project that will be validated by the client before we go further."
             },
             {
                 title: "Coding",
-                body: "Our favourite part, At this point, we will code your software to life. This part could take from one week to 16 weeks before the first delivery depending on the size of the project."
+                body: "Our favourite part, At this point, we will code your software to life."
             },
             {
                 title: "Content Creation",
@@ -79,15 +79,15 @@ const strings = {
         items: [
             {
                 title: "Analyse du projet",
-                body: "C’est là que nous déciderons de la technologie à utiliser pour votre projet de conception Web ou d’application mobile. Analyse du projet peut prendre jusqu'à 4 semaines."
+                body: "C’est là que nous déciderons de la technologie à utiliser pour votre projet de conception Web ou d’application mobile."
             },
             {
                 title: "Prototypage",
-                body: "Après analyse du projet, nous produirons un prototype du projet qui sera validé par le client avant d'aller plus loin. Le prototypage peut prendre jusqu'à six(6) semaines."
+                body: "Après analyse du projet, nous produirons un prototype du projet qui sera validé par le client avant d'aller plus loin."
             },
             {
                 title: "Coding",
-                body: "Notre partie préférée, à ce stade, nous allons coder votre site Web / application. Cette partie nous coûteras entre une et 16 semaines en fonction de la taille du projet."
+                body: "Notre partie préférée, à ce stade, nous allons coder votre site Web / application."
             },
             {
                 title: "Création de contenu",
