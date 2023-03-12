@@ -35,11 +35,11 @@ const Project: React.FC<Props> = ({ project, slug }) => {
                     <div className="flex flex-col flex-1 p-4">
                         {/* <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a> */}
 
-                        {/* <motion.div layoutId={`tags-${slug}`} className="flex flex-wrap">
+                        <motion.div layoutId={`tags-${slug}`} className="flex flex-wrap">
                             {
-                                project.tags.map(_tag => <span key={_tag} className="text-xs tracking-wider uppercase bg-teal-800 text-white p-1 md:p-2 m-1 ">{_tag}</span>)
+                                project.tools.edges.map(_tag => <span key={_tag.node.id} className="text-xs tracking-wider uppercase bg-teal-800 text-white p-1 md:p-2 m-1 ">{_tag.node.name}</span>)
                             }
-                        </motion.div> */}
+                        </motion.div>
 
                         <motion.h3 layoutId={`title-${slug}`} className="flex-1 py-2 text-lg font-semibold leading-snug">{project?.title}</motion.h3>
 
@@ -99,6 +99,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
                   altText
                   title
                   sourceUrl(size: MEDIUM)
+                }
+              }
+              tools {
+                edges {
+                  node {
+                    id
+                    name
+                  }
                 }
               }
               content

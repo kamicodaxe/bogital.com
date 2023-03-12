@@ -58,6 +58,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
                   sourceUrl(size: MEDIUM)
                 }
               }
+              tools {
+                edges {
+                  node {
+                    id
+                    name
+                  }
+                }
+              }
             }
           }
         }

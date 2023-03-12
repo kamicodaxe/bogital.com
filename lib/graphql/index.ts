@@ -47,6 +47,15 @@ export interface IProjectDataResponse {
     },
     "excerpt": string
     "content"?: string
+    tools: {
+        edges: {
+            node: {
+                id: string
+                name: string
+            }
+        }[]
+    }
+
 }
 
 export interface IHomePageData {
