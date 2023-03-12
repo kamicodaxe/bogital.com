@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
     "test": "react-scripts test"
@@ -22,6 +23,7 @@
     "graphql-request": "^4.3.0",
     "mui-datatables": "^4.2.2",
     "next": "12.2.2",
+    "next-sitemap": "^4.0.5",
     "nodemailer": "^6.8.0",
     "react": "18.2.0",
     "react-datocms": "^3.0.15",
