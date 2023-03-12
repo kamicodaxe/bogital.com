@@ -37,7 +37,7 @@ const Project: React.FC<Props> = ({ project, slug }) => {
 
                         <motion.div layoutId={`tags-${slug}`} className="flex flex-wrap">
                             {
-                                project.tools.edges.map(_tag => <span key={_tag.node.id} className="text-xs tracking-wider uppercase bg-teal-800 text-white p-1 md:p-2 m-1 ">{_tag.node.name}</span>)
+                                project?.tools?.edges.map(_tag => <span key={_tag.node.id} className="text-xs tracking-wider uppercase bg-teal-800 text-white p-1 md:p-2 m-1 ">{_tag.node.name}</span>)
                             }
                         </motion.div>
 
