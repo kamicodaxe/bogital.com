@@ -47,10 +47,12 @@ const HomeHeader: React.FC<Props> = ({ active, locale }) => {
                                 {s.invoice}
                             </button>
                         </Link>
-                        <button
-                            className="px-8 py-3 m-2 text-lg border rounded text-white hover:bg-teal-400 hover:border-teal-400 text-coolGray-50 border-coolGray-700">
-                            {s.more}
-                        </button>
+                        <Link href="/projects">
+                            <button
+                                className="px-8 py-3 m-2 text-lg border rounded text-white hover:bg-teal-400 hover:border-teal-400 text-coolGray-50 border-coolGray-700">
+                                {s.ourWork}
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -66,7 +68,7 @@ const strings = {
         WeBuild: "We build",
         assistance: "We bring your business to the web",
         invoice: "Request a quote",
-        more: "More",
+        ourWork: "Our work",
     },
     'fr': {
         title: "Project - Article",
@@ -74,7 +76,7 @@ const strings = {
         WeBuild: "Nous concevons ",
         assistance: "Nous vous accompagnons dans la digitalisation de votre activité.",
         invoice: "Demandez un devis",
-        more: "En savoir plus",
+        ourWork: "Nos projects",
     }
 }
 

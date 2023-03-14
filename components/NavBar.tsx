@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { useMemo } from "react"
+import { Fragment, useMemo, useState } from "react"
+import Drawer from "./Drawer"
 
 interface Props {
     active: string
@@ -29,6 +30,8 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
 
     const availableLocales = locales?.filter(locale => locale !== activeLocale)
     const lang = useMemo(() => (locale || '').toLowerCase().includes('fr'), [locale]) ? 'fr' : 'en'
+    const [isMenuVisible, setIsMenuVisible] = useState(false)
+    const toggleMenu = () => setIsMenuVisible(v => !v)
 
     const activeLink = (routeName: string) => {
         // TODO: Use classnames from npm
@@ -56,46 +59,47 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
     }
 
 
-
     return (
-        <div className="w-full fixed z-50">
-            <div className="flex relative justify-between h-16 container mx-auto px-4 z-50">
+        <Fragment>
+            <div className="w-full fixed z-50">
 
-                <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)] rounded"></div>
-                <Link href="/"
-                    className="flex items-center p-2">
-                    <span className="flex items-center cursor-pointer z-50">
-                        <img src="/images/logo.svg" alt="Bogital logo" srcSet="" className="h-6" />
-                    </span>
-                </Link>
-                <ul className="items-stretch hidden space-x-3 lg:flex z-50">
-                    {
-                        routes.map(_page => (
-                            <li className="flex items-center cursor-pointer" key={_page.path}>
-                                <Link href={_page.path}
-                                    className="flex items-center">
-                                    <span className={activeLink(_page.path)}>
-                                        {_page.name[lang]}
-                                    </span>
-                                </Link>
-                            </li>
-                        ))
-                    }
+                <div className="flex relative justify-between h-16 container mx-auto px-4 z-50">
 
-                </ul>
-                <div className="items-center flex-shrink-0 hidden lg:flex z-50">
-                    <button
-                        className="self-center px-8 py-3 font-semibold rounded text-white hover:bg-teal-300 bg-teal-400">
-                        <Link href="/contact/"
-                            className="flex items-center">
-                            <span className="">
-                                {lang == "en" ? "Contact Us" : "Contactez-nous"}
-                            </span>
-                        </Link>
-                    </button>
+                    <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)] rounded"></div>
+                    <Link href="/"
+                        className="flex items-center p-2">
+                        <span className="flex items-center cursor-pointer z-50">
+                            <img src="/images/logo.svg" alt="Bogital logo" srcSet="" className="h-6" />
+                        </span>
+                    </Link>
+                    <ul className="items-stretch hidden space-x-3 lg:flex z-50">
+                        {
+                            routes.map(_page => (
+                                <li className="flex items-center cursor-pointer" key={_page.path}>
+                                    <Link href={_page.path}
+                                        className="flex items-center">
+                                        <span className={activeLink(_page.path)}>
+                                            {_page.name[lang]}
+                                        </span>
+                                    </Link>
+                                </li>
+                            ))
+                        }
+
+                    </ul>
+                    <div className="items-center flex-shrink-0 hidden lg:flex z-50">
+                        <button
+                            className="self-center px-8 py-3 font-semibold rounded text-white hover:bg-teal-300 bg-teal-400">
+                            <Link href="/contact/"
+                                className="flex items-center">
+                                <span className="">
+                                    {lang == "en" ? "Contact Us" : "Contactez-nous"}
+                                </span>
+                            </Link>
+                        </button>
 
 
-                    {/* <div className="flex items-center justify-center px-4">
+                        {/* <div className="flex items-center justify-center px-4">
                         <div className="relative inline-block">
                             <button onMouseOver={showMenu} onMouseLeave={hideMenu}
                                 className="relative z-50 block p-2 text-gray-700 bg-white border border-transparent rounded-md dark:text-white focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:bg-gray-800 focus:outline-none">
@@ -127,16 +131,18 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
                         </div>
                     </div> */}
 
-                </div>
-                <button className="p-4 lg:hidden z-50">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                        className="w-6 h-6 dark:text-coolGray-100">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
+                    </div>
+                    <button onClick={toggleMenu} className="p-4 lg:hidden z-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            className="w-6 h-6 text-white">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
 
+                </div>
             </div>
-        </div>
+            <Drawer open={isMenuVisible} setOpen={setIsMenuVisible} />
+        </Fragment>
     )
 }
 
