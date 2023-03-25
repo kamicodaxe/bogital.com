@@ -31,6 +31,9 @@ export interface IPostDataResponse {
     },
     "excerpt": string
     "content"?: string
+    "language": {
+        slug: string
+    }
 }
 
 export interface IProjectDataResponse {
@@ -47,6 +50,9 @@ export interface IProjectDataResponse {
     },
     "excerpt": string
     "content"?: string
+    "language": {
+        slug: string
+    }
     tools: {
         edges: {
             node: {

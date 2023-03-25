@@ -168,6 +168,9 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
                 node {
                   postId
                   slug
+                  language {
+                    locale
+                  }
                 }
               }
             }
@@ -177,7 +180,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
     })
 
     return {
-        paths: (data.data.posts.edges as { node: IPostDataResponse }[]).map($ => ({ 'params': { slug: $.node.slug } })), //OK
+        paths: (data.data.posts.edges as { node: IPostDataResponse }[]).map($ => ({ 'params': { slug: $.node.slug }, locale: $.node.language.slug })), //OK
         fallback: 'blocking'
     }
 
