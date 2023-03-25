@@ -169,7 +169,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
                   postId
                   slug
                   language {
-                    locale
+                    slug
                   }
                 }
               }
