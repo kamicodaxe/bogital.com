@@ -33,7 +33,7 @@ const HomeHeader: React.FC<Props> = ({ active, locale }) => {
                                         <div className="w-auto p-1"><a className="text-sm" href="" data-config-id="auto-txt-11-1">👋 We are hiring! View open roles</a></div>
                                         <div className="w-auto p-1">
                                             <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" data-config-id="auto-svg-3-1">
-                                                <path d="M8.66667 3.41675L12.75 7.50008M12.75 7.50008L8.66667 11.5834M12.75 7.50008L2.25 7.50008" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M8.66667 3.41675L12.75 7.50008M12.75 7.50008L8.66667 11.5834M12.75 7.50008L2.25 7.50008" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
                                             </svg>
                                         </div>
                                     </div>
