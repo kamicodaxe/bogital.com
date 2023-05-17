@@ -68,49 +68,27 @@ const OurWork: React.FC<Props> = ({ locale, title, isPreview, projects }) => {
                     }
                 </dl>
 
+                {
+                    isPreview && (
+                        <Link type="button" href='/blog'
+                            className=" py-8">
+                            <button type="button"
+                                className="p-2 px-8 flex items-center mx-auto text-lg  hover:text-teal-500">
+                                {isFr ? "Plus" : "More"}
+                                <span className=" inline-block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 ml-2">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </Link>
+                    )
+                }
+
             </div>
         </div>
     )
 }
-
-
-// {
-//     !isPreview && (
-//         <>
-//             <h3 className="text-xl font-extrabold sm:text-2xl">Mobile applications</h3>
-//             <dl className="mt-4 space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-8">
-//                 {
-//                     projects.filter(_ => _.platform == "mobile").map((_customer, i) => {
-//                         const slug = _customer.title.toLowerCase().split(' ').join('-')
-//                         return (
-//                             <Link className="flex" href={`/projects/${slug}`} key={_customer.title}>
-//                                 <div className="flex flex-col cursor-pointer hover:bg-teal-400 hover:text-white">
-//                                     <motion.figure className="flex" layoutId={"image-" + slug}>
-//                                         <Image src={_customer.image.src} width={420} height={260} className="object-cover" alt={_customer.image.alt} />
-//                                     </motion.figure>
-
-//                                     <div className="ml-2 mt-2">
-//                                         <motion.dt className="text-lg font-medium" layoutId={"title-" + slug}>
-//                                             {_customer.title}
-//                                         </motion.dt>
-//                                         {/* <dd className="mt-2 text-gray-600">{_customer.desc}</dd> */}
-//                                     </div>
-
-//                                     <div className="flex p-2  mb-8 flex-wrap">
-//                                         {
-//                                             _customer.tags.map(_tag => <span key={_tag} className="text-xs tracking-wider uppercase bg-teal-800 text-white p-1 md:p-2 m-1 ">{_tag}</span>)
-//                                         }
-//                                     </div>
-//                                 </div>
-//                             </Link >
-//                         )
-//                     })
-//                 }
-//             </dl >
-
-//         </>
-//     )
-// }
 
 
 export default OurWork

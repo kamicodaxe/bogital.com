@@ -27,49 +27,69 @@ const routes = [
 const Footer: React.FC<{ locale: string }> = ({ locale }) => {
     const lang = useMemo(() => (locale || '').toLowerCase().includes('fr'), [locale]) ? 'fr' : 'en'
     return (
-        <footer className="px-4 pt-8 text-gray-800">
-            <div className="container flex flex-wrap items-center justify-center mx-auto space-y-4 sm:justify-between sm:space-y-0">
-                <div className="flex flex-row flex-wrap pr-3 space-x-4 sm:space-x-8">
-                    <Link href="/" aria-label="Back to Bogital by Bogital homepage" className="flex items-center justify-center flex-shrink-0">
-                        <div className="mx-auto h-24 w-48 relative cursor-pointer">
-                            {/* <Image
-                                layout="fill"
-                                src={logoImage}
-                                className="object-contain"
-                                alt="Logo - Taroungamograph by Tarounga Mbaye "
-                            /> */}
-                            <img src="/images/logo.svg" alt="Bogital logo" srcSet="" className="h-24" />
-                        </div>
-                    </Link>
+        <footer className="px-4 pt-8  bg-[#0C0D0E] text-white">
+            <div className="container max-w-7xl mx-auto">
 
-                    <ul className="flex flex-wrap items-center space-x-4 sm:space-x-8">
-                        {
-                            routes.map(route => (
-                                <li key={route.path} className="cursor-pointer">
-                                    <Link href={route.path}>
-                                        <span className="px-4">
-                                            {route.name[lang]}
-                                        </span>
-                                    </Link>
-                                </li>
-                            ))
-                        }
-                    </ul>
+                <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3 text-center sm:text-left pb-16">
+                    <div>
+                        <Link href="/" aria-label="Back to Bogital by Bogital homepage" className="">
+                            <div className=" h-24 w-48 relative cursor-pointer">
+                                <img src="/images/logo.svg" alt="Bogital logo" srcSet="" className="h-24" />
+                            </div>
+                        </Link>
+
+                        <h4 className=" text-xl text-[#757575] pb-4">CONTACT INFOS</h4>
+
+                        <ul className=" space-y-2">
+                            <li>Melen, Yaounde</li>
+                            <li>contact@bogital.com</li>
+                            <li>(+237) 696 835 158</li>
+                            <li>(+237) 693 369 322</li>
+                        </ul>
+
+                    </div>
+
+                    <div className=" md:mt-24">
+                        <h4 className=" text-xl text-[#757575] pb-4">LINKS</h4>
+                        <ul className=" space-y-2">
+                            {
+                                routes.map(route => (
+                                    <li key={route.path} className="cursor-pointer">
+                                        <Link href={route.path}>
+                                            <span className="">
+                                                {route.name[lang]}
+                                            </span>
+                                        </Link>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+
+                    </div>
+
+                    <div className=" md:mt-24">
+                        <h4 className=" text-xl text-[#757575] pb-4">SOCIAL MEDIA</h4>
+                        <ul className=" space-y-2">
+                            <li>
+                                <a rel="noopener noreferrer" target={"_blank"} href="https://facebook.com/bogital" title="Facebook"
+                                    className="">
+                                    Facebook
+                                </a>
+                            </li>
+                            {/* <li>
+                                <a rel="noopener noreferrer" target={"_blank"} href="https://linkedin.com/bogital" title="Facebook"
+                                    className="">
+                                    LinkedIn
+                                </a>
+                            </li> */}
+                        </ul>
+                    </div>
+
                 </div>
-                {/* <ul className="flex flex-wrap mx-auto pl-3 space-x-4 lg:space-x-8">
-                    <li>
-                        <a href="#">Instagram</a>
-                    </li>
-                    <li>
-                        <a href="#">Facebook</a>
-                    </li>
-                    <li>
-                        <a href="#">Twitter</a>
-                    </li>
-                </ul> */}
 
-                <div className="flex justify-center space-x-4">
-                    {/* <a rel="noopener noreferrer" href="#" title="Instagram"
+
+                {/* <div className="flex justify-center space-x-4"> */}
+                {/* <a rel="noopener noreferrer" href="#" title="Instagram"
                         className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-teal-400 text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" className="w-4 h-4">
                             <path
@@ -93,15 +113,15 @@ const Footer: React.FC<{ locale: string }> = ({ locale }) => {
                             </path>
                         </svg>
                     </a> */}
-                    <a rel="noopener noreferrer" target={"_blank"} href="https://facebook.com/bogital" title="Facebook"
+                {/* <a rel="noopener noreferrer" target={"_blank"} href="https://facebook.com/bogital" title="Facebook"
                         className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-teal-400 text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 32 32" className="w-4 h-4">
                             <path
                                 d="M32 16c0-8.839-7.167-16-16-16-8.839 0-16 7.161-16 16 0 7.984 5.849 14.604 13.5 15.803v-11.177h-4.063v-4.625h4.063v-3.527c0-4.009 2.385-6.223 6.041-6.223 1.751 0 3.584 0.312 3.584 0.312v3.937h-2.021c-1.984 0-2.604 1.235-2.604 2.5v3h4.437l-0.713 4.625h-3.724v11.177c7.645-1.199 13.5-7.819 13.5-15.803z">
                             </path>
                         </svg>
-                    </a>
-                    {/* <a rel="noopener noreferrer" href="#" title="Gmail"
+                    </a> */}
+                {/* <a rel="noopener noreferrer" href="#" title="Gmail"
                         className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-teal-400 text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 32 32" className="w-4 h-4">
                             <path
@@ -109,9 +129,10 @@ const Footer: React.FC<{ locale: string }> = ({ locale }) => {
                             </path>
                         </svg>
                     </a> */}
-                </div>
+                {/* </div> */}
 
             </div>
+
             <p className="text-xs text-center pt-4 p-2 md:pt-2">Coded with ❤️ by <a href="https://bogital.com">Bogital</a></p>
         </footer>
     )

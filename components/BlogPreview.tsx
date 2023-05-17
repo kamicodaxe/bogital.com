@@ -65,6 +65,23 @@ const BlogPreview: React.FC<Props> = ({ locale, articles, isPreview }) => {
 
                     }
                 </div>
+
+                {
+                    isPreview && (
+                        <Link type="button" href='/blog'
+                            className=" py-8">
+                            <button type="button"
+                                className="p-2 px-8 flex items-center mx-auto text-lg  hover:text-teal-500">
+                                {s.more}
+                                <span className=" inline-block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 ml-2">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </Link>
+                    )
+                }
             </div>
         </section>
     )
@@ -75,10 +92,12 @@ const strings = {
     'en': {
         title: 'Any news?',
         subtitle: 'Our Blog',
+        more: 'See more'
     },
     'fr': {
         title: 'Des infos?',
         subtitle: 'Articles',
+        more: 'plus'
     }
 }
 
