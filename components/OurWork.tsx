@@ -28,7 +28,13 @@ const OurWork: React.FC<Props> = ({ locale, title, isPreview, projects }) => {
                 </div> */}
                 {
                     isPreview ?
-                        <h3 className="heading"> {title || (isFr ? "Ils nous ont fait confiance" : "They trusted us - our favorites")} </h3>
+                        <>
+                            {/* <h3 className="heading"> {title || (isFr ? "Ils nous ont fait confiance" : "They trusted us - our favorites")} </h3> */}
+                            <p className="p-2 text-sm font-medium tracking-wider text-center uppercase">
+                                {title || (isFr ? "Nos favoris" : "Our favorites")}</p>
+                            <h2 className="mb-12 text-4xl font-bold leading-none text-center sm:text-5xl">
+                                {title || (isFr ? "Projets" : "Projects")}</h2>
+                        </>
                         :
                         <h3 className="text-xl font-extrabold sm:text-2xl">{""}</h3>
                 }

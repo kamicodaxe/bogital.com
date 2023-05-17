@@ -34,8 +34,8 @@ const BlogPreview: React.FC<Props> = ({ locale, articles, isPreview }) => {
                                     <article className="flex flex-col cursor-pointer hover:bg-teal-400 hover:text-white bg-coolGray-900">
                                         <motion.img
                                             className="object-cover w-full h-52 bg-coolGray-500"
-                                            src={_item.featuredImage.node.sourceUrl}
-                                            layoutId={"image-" + _item.featuredImage.node.sourceUrl}
+                                            src={_item.featuredImage?.node?.sourceUrl}
+                                            layoutId={"image-" + _item.featuredImage?.node?.sourceUrl}
                                         />
                                         {/* <img alt="" className="object-cover w-full h-52 bg-coolGray-500"
                                                 src={_item.image} /> */}

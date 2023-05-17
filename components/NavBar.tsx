@@ -63,7 +63,7 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
         <Fragment>
             <div className="w-full fixed z-50">
 
-                <div className="flex relative justify-between h-16 container mx-auto px-4 z-50">
+                <div className="flex relative justify-between h-16 container max-w-7xl mx-auto px-4 z-50">
 
                     <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)] rounded"></div>
                     <Link href="/"

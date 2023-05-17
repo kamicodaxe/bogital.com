@@ -50,28 +50,28 @@ const strings = {
     'en': {
         items: [
             {
-                title: "Project Analysis",
-                body: "This is where we will decide which technology sack to use for your web design or mobile application project."
+                title: "Discovery Phase",
+                body: "We first gain an understanding of your business needs and goals, your target audience, and competitors in Africa."
             },
             {
-                title: "Prototyping",
-                body: "After analysing the project, we will produce a prototype of the project that will be validated by the client before we go further."
+                title: "Design Phase",
+                body: "We create a design concept that reflects your brand, resonates with your target audience, and is mobile-friendly"
             },
             {
                 title: "Coding",
                 body: "Our favourite part, At this point, we will code your software to life."
             },
             {
-                title: "Content Creation",
-                body: "At this point, we will create SEO ready content for your website/application. Here we will need all the documentation the client can provide to us."
+                title: "Development Phase",
+                body: "We use the latest coding languages and technologies to create a website optimized to handle low bandwidth and work seamlessly on different devices and platforms in Africa and the world."
             },
             {
-                title: "Quality Check",
-                body: "This is a critical step of our work. The whole project is thouroughly reviewed before final deployment."
+                title: "Testing and Launch Phase",
+                body: "We ensure your website functions optimally on different devices under different conditions, including slower internet speeds typical of the African market"
             },
             {
-                title: "Deployment",
-                body: "Horraay. Your project is now battle tested and deployed"
+                title: "Ongoing Maintenance and Support",
+                body: "We provide consistent support for your website and offer training to help you manage it, updating content as needed"
             }
         ]
     },

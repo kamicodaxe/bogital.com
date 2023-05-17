@@ -18,7 +18,7 @@ const HomeHeader: React.FC<Props> = ({ active, locale }) => {
 
     return (
         <header className="bg-cover bg-coolGray-800 text-coolGray-100  bg-[url(https://source.unsplash.com/UVMPVIRCF5w/1280x)] bg-center relative">
-            <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)]"></div>
+            <div className="absolute inset-0 bg-[rgba(0,0,0,0.75)]"></div>
             <NavBar active={active} locale={locale} />
 
             <section className="bg-coolGray-800 text-coolGray-100 py-16">
@@ -58,9 +58,11 @@ const HomeHeader: React.FC<Props> = ({ active, locale }) => {
                         </span>
                     </h1>
                     <p className="px-8 mt-8 mb-12 text-white text-lg z-10">
-                        {s.assistance}
+                        {s.subTitle}
+                        <br />
+                        {s.subTitle2}
                     </p>
-                    <div className="flex flex-wrap justify-center z-10">
+                    <div className="flex flex-wrap justify-center z-10 space-x-8">
                         <Link href="/contact">
                             <button
                                 className="px-8 py-3 m-2 text-lg font-semibold rounded text-white hover:bg-teal-300 bg-teal-400 text-coolGray-900">
@@ -86,7 +88,8 @@ const strings = {
         title: "Project - Article",
         desc: "Bogital Project - Latest Tech news in Africa",
         WeBuild: "We build",
-        assistance: "We bring your business to the web",
+        subTitle: "Are you ready to take your business to the next Level?",
+        subTitle2: "Bogital can help with tailored web/mobile/software solutions that meets your specific needs.",
         invoice: "Request a quote",
         ourWork: "Our work",
     },
@@ -94,7 +97,8 @@ const strings = {
         title: "Project - Article",
         desc: "Bogital Project - Latest Tech news in Africa",
         WeBuild: "Nous concevons ",
-        assistance: "Nous vous accompagnons dans la digitalisation de votre activité.",
+        subTitle: "Nous vous accompagnons dans la digitalisation de votre activité.",
+        subTitle2: "",
         invoice: "Demandez un devis",
         ourWork: "Nos projects",
     }
