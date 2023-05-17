@@ -8,9 +8,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'sans': 'Lato, Helvetica, Arial, sans-serif',
+      },
       colors: {
-        'primary': '#3b82f6',
-        'clifford': '#da373d',
+        'primary': '#2DD4BF',
+        'yellow': '#FFC700',
         'jade': '#00A86B',
         'secondary': '#C7A222',
         'tertiary': '#F8471C',

@@ -23,8 +23,8 @@ const Home: NextPage<IHomePageData> = ({ data: { projects, posts } }) => {
       <HomeHeader locale={locale as string} active="home" />
       <OurWork isPreview locale={locale as string} projects={projects?.edges?.map(p => p.node) || []} />
       <Partners locale={locale as string} />
-      <CTA />
       <Services locale={locale as string} />
+      <CTA />
       <Process locale={locale as string} />
       <FAQ locale={locale as string} />
       <BlogPreview isPreview locale={locale as string} articles={posts?.edges?.map(p => p.node) || []} />

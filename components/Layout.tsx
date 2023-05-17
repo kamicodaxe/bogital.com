@@ -24,7 +24,7 @@ const Layout: React.FC<Props> = ({ children, locale, title, desc, hideFooter, im
     const siteName = isFr ? "Bogital - Nous vous accompagnons dans la digitalisation de votre activité." : "Bogital - We build software to make your life easier"
 
     return (
-        <div>
+        <div className='font-sans'>
             <Head>
                 <title>{title}</title>
                 <meta name="description" content={desc} />
