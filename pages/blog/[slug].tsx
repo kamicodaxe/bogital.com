@@ -1,3 +1,4 @@
+import { gql } from "@apollo/client"
 import { GetStaticPaths, GetStaticProps } from "next"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -5,12 +6,11 @@ import { useMemo } from "react"
 import BlogPreview from "../../components/BlogPreview"
 import Header from "../../components/Header"
 import Layout from "../../components/Layout"
-import wordpress from "../../lib/wordpress"
-import { IWordpressArticle } from "../../lib/wordpress/types"
+import { getApolloClient, IPostDataResponse } from "../../lib/graphql"
 
 interface Props {
-    article: IWordpressArticle,
-    articles: IWordpressArticle[],
+    article: IPostDataResponse,
+    articles: IPostDataResponse[],
     slug: string
 }
 
@@ -19,10 +19,9 @@ const Blog: React.FC<Props> = ({ article, articles, slug }) => {
     const lang = useMemo(() => (locale || '').toLowerCase().includes('fr'), [locale]) ? 'fr' : 'en'
     const s = strings[lang]
 
-    // console.log(article)
     return (
-        <Layout locale={locale as string} title={s.title} desc={s.desc}>
-            <Header locale={locale as string} title={article?.title.rendered} active='blog' className="bg-[url(https://source.unsplash.com/ip9R11FMbV8/1200x720)]" />
+        <Layout locale={locale as string} title={article?.title || s.title} imgSrc={article?.featuredImage?.node?.sourceUrl} desc={article?.excerpt?.replaceAll('<p>', "").replaceAll('</p>', "") || s.desc}>
+            <Header locale={locale as string} title={article?.title} active='blog' className="bg-[url(https://source.unsplash.com/ip9R11FMbV8/1200x720)]" />
             <section className=" text-gray-800">
                 <div className="grid grid-cols-3 relative">
 
@@ -30,18 +29,18 @@ const Blog: React.FC<Props> = ({ article, articles, slug }) => {
 
                         <div className=" max-w-fit mt-10">
                             <div className="flex flex-wrap justify-between text-sm font-bold text-coolGray-400">
-                                <span className="">{article?.date}</span>
+                                {/* <span className="">{article?.date}</span> */}
                                 {/* <span className="">{article?.views} views</span> */}
                             </div>
                             <img
                                 className=""
-                                src={article._embedded['wp:featuredmedia'][0].source_url}
+                                src={article.featuredImage.node.sourceUrl}
                                 alt=""
                             // layoutId="image"
                             />
                         </div>
 
-                        <div className="prose lg:prose-xl" dangerouslySetInnerHTML={{ __html: article.content.rendered }} />
+                        <div className="prose lg:prose-xl" dangerouslySetInnerHTML={{ __html: article?.content || '' }} />
 
 
                     </div>
@@ -49,19 +48,19 @@ const Blog: React.FC<Props> = ({ article, articles, slug }) => {
                     <div className="pt-12 hidden md:block space-y-4">
                         {
                             articles.map(_item => (
-                                <Link key={_item.id} href={`/blog/${_item.slug}`}>
+                                <Link key={_item.slug} href={`/blog/${_item.slug}`}>
                                     <article className="flex cursor-pointer items-center hover:bg-teal-400 hover:text-white bg-coolGray-900">
                                         <img
                                             className="object-cover w-16 h-16 bg-coolGray-500"
-                                            src={_item._embedded['wp:featuredmedia'][0].source_url}
+                                            src={_item?.featuredImage?.node?.sourceUrl}
                                             alt=""
                                         />
                                         <div className="px-2">
                                             {/* <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a> */}
-                                            <h6 className=" font-semibold leading-snug text-md">{_item.title.rendered}</h6>
+                                            <h6 className=" font-semibold leading-snug text-md">{_item.title}</h6>
                                             {/* <span className="text-xs tracking-wider uppercase text-teal-400">{_item.author}</span> */}
                                             <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs text-coolGray-400">
-                                                <span>{_item.date}</span>
+                                                {/* <span>{_item.date}</span> */}
                                                 {/* <span>{_item.views} views</span> */}
                                             </div>
                                         </div>
@@ -84,129 +83,104 @@ const Blog: React.FC<Props> = ({ article, articles, slug }) => {
 const strings = {
     'en': {
         title: "Blog - Article",
-        desc: "Bogital Blog - Latest Tech news in Africa",
-        article: {
-            title: "How much will it cost me?",
-            author: "Bogital",
-            image: {
-                src: "/images/blog/why-website.jpg",
-                alt: ''
-            },
-            date: "June 3, 2020",
-            views: "2.4k",
-            body: "The cost depends on many factors. These factors may include; the number of pages, technologies used in the backend, hosting, private emails, design complexity, client skills etc...Write to us directly from our rapid contact form or call us(696835158) directly."
-        },
-        items: [
-            {
-                title: "How much will it cost me?",
-                author: "Bogital",
-                image: {
-                    src: "/images/blog/why-website.jpg",
-                    alt: ''
-                },
-                date: "June 3, 2020",
-                views: "2.4k",
-                body: "The cost depends on many factors. These factors may include; the number of pages, technologies used in the backend, hosting, private emails, design complexity, client skills etc...Write to us directly from our rapid contact form or call us(696835158) directly."
-            },
-        ]
+        desc: "Bogital Blog - Latest Tech news in Africa"
     },
     'fr': {
         title: "Blog - Article",
-        desc: "Bogital Blog - Latest Tech news in Africa",
-        article: {
-            title: "How much will it cost me?",
-            author: "Bogital",
-            image: {
-                src: "/images/blog/why-website.jpg",
-                alt: ''
-            },
-            date: "June 3, 2020",
-            views: "2.4k",
-            body: "The cost depends on many factors. These factors may include; the number of pages, technologies used in the backend, hosting, private emails, design complexity, client skills etc...Write to us directly from our rapid contact form or call us(696835158) directly."
-        },
-        items: [
-            {
-                title: "How much will it cost me?",
-                author: "Bogital",
-                image: {
-                    src: "/images/blog/why-website.jpg",
-                    alt: ''
-                },
-                date: "June 3, 2020",
-                views: "2.4k",
-                body: "The cost depends on many factors. These factors may include; the number of pages, technologies used in the backend, hosting, private emails, design complexity, client skills etc...Write to us directly from our rapid contact form or call us(696835158) directly."
-            },
-            // {
-            //     title: "What are the payment terms?",
-            //     author: "Bogital",
-            //     image: "https://source.unsplash.com/200x200/?techology?2",
-            //     date: "June 3, 2020",
-            //     views: "2.4k",
-            //     body: "We expect our clients to buy their domain names and email plus 20 000 FCFA before we start designing. You will pay half of the amount remaining when the web design will be validated.Then complete the payment after project completion."
-            // },
-            // {
-            //     title: "What if I don't love your work?",
-            //     author: "Bogital",
-            //     image: "https://source.unsplash.com/200x200/?techology?3",
-            //     date: "June 3, 2020",
-            //     views: "2.4k",
-            //     body: "At Bogital, a project is completed only when the client is satisfied. If you don't love our web design prototype, we will work with you to improve the design until satisfaction."
-            // },
-            // {
-            //     title: "How to update my website?",
-            //     author: "Bogital",
-            //     image: "https://source.unsplash.com/200x200/?techology?4",
-            //     date: "June 3, 2020",
-            //     views: "2.4k",
-            //     body: "We provide a personalised content manager for all the web sites we develop at Bogital Cameroon. This content manager provides a simple interface to update the content of your website.In addition, we build Wordpress websites which are very easy to customise."
-            // },
-            // {
-            //     title: "What if I don't love your work",
-            //     author: "Bogital",
-            //     image: "https://source.unsplash.com/200x200/?techology?5",
-            //     date: "June 3, 2020",
-            //     views: "2.4k",
-            //     body: "At Bogital, a project is completed only when the client is satisfied. If you don't love our web design prototype, we will work with you to improve the design until satisfaction."
-            // },
-            // {
-            //     title: "How to update my website",
-            //     author: "Bogital",
-            //     image: "https://source.unsplash.com/200x200/?techology?6",
-            //     date: "June 3, 2020",
-            //     views: "2.4k",
-            //     body: "We provide a personalised content manager for all the web sites we develop at Bogital Cameroon. This content manager provides a simple interface to update the content of your website.In addition, we build Wordpress websites which are very easy to customise."
-            // }
-        ]
+        desc: "Bogital Blog - Latest Tech news in Africa"
     }
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-    wordpress.initialiseWordpress()
-    const articles = await wordpress.getCollection('posts?_embed') as IWordpressArticle[]
-    const data = await wordpress.getCollection(`posts?slug=${context?.params?.slug}&_embed`) as IWordpressArticle[]
-    if (data.length > 0) return {
+    const apolloClient = getApolloClient()
+    const data = await apolloClient.query({
+        query: gql`
+        query GetPostBySlug($slug: String = "", $language: LanguageCodeFilterEnum = EN) {
+            postBy(slug: $slug) {
+              id
+              postId
+              title(format: RENDERED)
+              slug
+              excerpt(format: RENDERED)
+              featuredImage {
+                node {
+                  altText
+                  sourceUrl(size: MEDIUM_LARGE)
+                }
+              }
+              content(format: RENDERED)
+              translations {
+                id
+                postId
+                slug
+                uri
+                link
+                language {
+                  code
+                  locale
+                }
+              }
+            }
+            posts(where: {language: $language}) {
+              edges {
+                node {
+                  postId
+                  slug
+                  title(format: RENDERED)
+                  featuredImage {
+                    node {
+                      altText
+                      caption
+                      sourceUrl(size: THUMBNAIL)
+                    }
+                  }
+                  excerpt(format: RENDERED)
+                }
+              }
+            }
+          }
+        `,
+        variables: {
+            slug: context.params?.slug,
+            language: context.locale?.toUpperCase(),
+        }
+    })
+
+
+    return {
         props: {
-            article: data[0],
-            articles,
+            article: data?.data.postBy as IPostDataResponse,
+            articles: (data?.data?.posts?.edges).map((p: { node: IPostDataResponse }) => p?.node),
             slug: context.params?.slug,
             revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
         }
     }
 
-    return {
-        props: {
-            article: strings.en.items[0],
-            slug: context.params?.slug,
-            revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
-        }
-    }
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-    wordpress.initialiseWordpress()
-    const articles = await wordpress.getCollection('posts?_embed') as IWordpressArticle[]
+export const getStaticPaths: GetStaticPaths = async (context) => {
+    const apolloClient = getApolloClient()
+    const data = await apolloClient.query({
+        query: gql`
+        query AllPostSlugs($language: LanguageCodeFilterEnum = ALL) {
+            posts(where: {language: $language}) {
+              edges {
+                node {
+                  postId
+                  slug
+                  language {
+                    slug
+                  }
+                }
+              }
+            }
+          }
+    `,
+        variables: {}
+    })
+
     return {
-        paths: articles.map($ => ({ 'params': { slug: $.slug } })), //OK
+        paths: (data.data.posts.edges as { node: IPostDataResponse }[]).map($ => ({ 'params': { slug: $.node.slug }, locale: $.node.language.slug })), //OK
         fallback: 'blocking'
     }
 

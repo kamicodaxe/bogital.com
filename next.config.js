@@ -9,7 +9,7 @@ const nextConfig = {
     // providing the locales supported by your application
     locales: ["en", "fr"],
     //  default locale used when the non-locale paths are visited
-    defaultLocale: "fr",
+    defaultLocale: "en",
   },
 }
 

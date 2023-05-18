@@ -1,5 +1,3 @@
-import Link from "next/link"
-import { useMemo, useState } from "react"
 import NavBar from "./NavBar"
 
 
@@ -30,7 +28,7 @@ const HomeHeader: React.FC<Props> = ({ active, locale, className, title, navBarO
                 !navBarOnly && (
                     <section className="bg-coolGray-800 text-coolGray-100">
                         <div
-                            className="container mx-auto flex flex-col items-center px-4 py-16 text-center md:py-32 md:px-10 lg:px-32 xl:max-w-3xl">
+                            className="container mx-auto flex flex-col items-center px-4 py-16 text-center md:py-32 md:px-10 lg:px-32 xl:max-w-7xl">
                             <h1 className="text-4xl font-bold leading-none text-white sm:text-5xl z-10">
                                 {title}
                             </h1>

@@ -1,5 +1,7 @@
 import Link from "next/link"
-import { useMemo, useState } from "react"
+import { useRouter } from "next/router"
+import { Fragment, useMemo, useState } from "react"
+import Drawer from "./Drawer"
 
 interface Props {
     active: string
@@ -8,11 +10,17 @@ interface Props {
 
 const routes = [
     {
-        name: "Our Work",
+        name: {
+            en: "Our Work",
+            fr: "Projets"
+        },
         path: "/projects"
     },
     {
-        name: "Blog",
+        name: {
+            en: "Blog",
+            fr: "Blog",
+        },
         path: "/blog"
     },
     {
@@ -27,6 +35,12 @@ const routes = [
 ]
 
 const NavBar: React.FC<Props> = ({ active, locale }) => {
+    const { locale: activeLocale, locales, asPath } = useRouter()
+
+    const availableLocales = locales?.filter(locale => locale !== activeLocale)
+    const lang = useMemo(() => (locale || '').toLowerCase().includes('fr'), [locale]) ? 'fr' : 'en'
+    const [isMenuVisible, setIsMenuVisible] = useState(false)
+    const toggleMenu = () => setIsMenuVisible(v => !v)
 
     const activeLink = (routeName: string) => {
         // TODO: Use classnames from npm
@@ -35,13 +49,6 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
         // isActive ? alert("Active " + routeName) : alert("Inactive " + routeName)
         if (isActive) return 'p-2 px-4 border-b-2 text-teal-400 border-teal-400'
         return 'p-2 px-4 border-b-2 border-transparent text-white hover:text-teal-400 hover:border-teal-400'
-    }
-
-    const isFrench = useMemo(() => locale.toLowerCase().includes('fr'), [locale])
-    const [isActive, setIsAvtice] = useState(false)
-
-    const toggleMenu = () => {
-        setIsAvtice(v => !v)
     }
 
     function showMenu() {
@@ -60,53 +67,49 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
         }
     }
 
-    // <li className={activeLink('pricing')}>
-    //     <Link href='/pricing' className="flex items-center -mb-1">
-    //         <span className="">
-    //             {isFrench ? 'Coûts' : 'Pricing'}
-    //         </span>
-    //     </Link>
-    // </li>
 
     return (
-        <div className="w-full fixed z-50">
-            <div className="flex relative justify-between h-16 container mx-auto px-4 z-50">
+        <Fragment>
+            <div className="w-full fixed z-50">
 
-                <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)] rounded"></div>
-                <Link href="/"
-                    className="flex items-center p-2">
-                    <span className="flex items-center cursor-pointer z-50">
-                        <img src="/images/logo.svg" alt="Bogital logo" srcSet="" className="h-6" />
-                    </span>
-                </Link>
-                <ul className="items-stretch hidden space-x-3 lg:flex z-50">
-                    {
-                        routes.map(_page => (
-                            <li className="flex items-center cursor-pointer" key={_page.path}>
-                                <Link href={_page.path}
-                                    className="flex items-center">
-                                    <span className={activeLink(_page.path)}>
-                                        {_page.name}
-                                    </span>
-                                </Link>
-                            </li>
-                        ))
-                    }
+                <div className="flex relative justify-between h-16 container max-w-7xl mx-auto px-4 z-50">
 
-                </ul>
-                <div className="items-center flex-shrink-0 hidden lg:flex z-50">
-                    <button
-                        className="self-center px-8 py-3 font-semibold rounded text-white hover:bg-teal-300 bg-teal-400">
-                        <Link href="/contact/"
-                            className="flex items-center">
-                            <span className="">
-                                Contact Us
-                            </span>
-                        </Link>
-                    </button>
-                    <div className="flex items-center justify-center px-4">
+                    <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)] rounded"></div>
+                    <Link href="/"
+                        className="flex items-center p-2">
+                        <span className="flex items-center cursor-pointer z-50">
+                            <img src="/images/logo.svg" alt="Bogital logo" srcSet="" className="h-6" />
+                        </span>
+                    </Link>
+                    <ul className="items-stretch hidden space-x-3 lg:flex z-50">
+                        {
+                            routes.map(_page => (
+                                <li className="flex items-center cursor-pointer" key={_page.path}>
+                                    <Link href={_page.path}
+                                        className="flex items-center">
+                                        <span className={activeLink(_page.path)}>
+                                            {_page.name[lang]}
+                                        </span>
+                                    </Link>
+                                </li>
+                            ))
+                        }
+
+                    </ul>
+                    <div className="items-center flex-shrink-0 hidden lg:flex z-50">
+                        <button
+                            className="self-center px-8 py-3 font-semibold rounded text-white hover:bg-teal-300 bg-teal-400">
+                            <Link href="/contact/"
+                                className="flex items-center">
+                                <span className="">
+                                    {lang == "en" ? "Contact Us" : "Contactez-nous"}
+                                </span>
+                            </Link>
+                        </button>
+
+
+                        {/* <div className="flex items-center justify-center px-4">
                         <div className="relative inline-block">
-                            {/* Dropdown toggle button  */}
                             <button onMouseOver={showMenu} onMouseLeave={hideMenu}
                                 className="relative z-50 block p-2 text-gray-700 bg-white border border-transparent rounded-md dark:text-white focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:bg-gray-800 focus:outline-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -116,38 +119,39 @@ const NavBar: React.FC<Props> = ({ active, locale }) => {
                                 </svg>
                             </button>
 
-                            {/* Dropdown menu  */}
                             <div id="drop-down"
                                 className="absolute right-0 z-20 mt-2 hidden overflow-hidden bg-white rounded-md shadow-lg w-80 dark:bg-gray-800">
                                 <div className="py-2">
-                                    <a href="#"
-                                        className="flex items-center px-4 py-3 -mx-2 transition-colors duration-200 transform border-b border-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700 dark:border-gray-700">
-                                        <p className="mx-2 text-sm text-gray-600 dark:text-white"><span className="font-bold" />
-                                            English
-                                        </p>
-                                    </a>
-                                    <a href="#"
-                                        className="flex items-center px-4 py-3 -mx-2 transition-colors duration-200 transform hover:bg-gray-50 dark:hover:bg-gray-700 dark:border-gray-700">
+                                    {
+                                        availableLocales?.map(
+                                            _locale => (
+                                                <Link key={_locale} href={asPath}
+                                                    className="flex items-center px-4 py-3 -mx-2 transition-colors duration-200 transform border-b border-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700 dark:border-gray-700">
+                                                    <p className="mx-2 text-sm text-gray-600 dark:text-white"><span className="font-bold" />
+                                                        {_locale.toUpperCase()}
+                                                    </p>
+                                                </Link>
+                                            )
+                                        )
+                                    }
 
-                                        <p className="mx-2 text-sm text-gray-600 dark:text-white"><span className="font-bold" />
-                                            Français
-                                        </p>
-                                    </a>
                                 </div>
                             </div>
                         </div>
+                    </div> */}
+
                     </div>
+                    <button onClick={toggleMenu} className="p-4 lg:hidden z-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            className="w-6 h-6 text-white">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
 
                 </div>
-                <button className="p-4 lg:hidden z-50">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                        className="w-6 h-6 dark:text-coolGray-100">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-
             </div>
-        </div>
+            <Drawer open={isMenuVisible} setOpen={setIsMenuVisible} />
+        </Fragment>
     )
 }
 

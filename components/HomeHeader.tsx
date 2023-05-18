@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react"
+import Link from "next/link"
+import { useMemo } from "react"
 import NavBar from "./NavBar"
 import Typical from "./Typical"
 
@@ -9,67 +10,98 @@ interface Props {
 }
 
 const HomeHeader: React.FC<Props> = ({ active, locale }) => {
-    const activeLink = (routeName: string) => {
-        // TODO: Use classnames from npm
-        if (!active) return 'flex items-center px-4 -mb-1 border-b-2 border-transparent hover:text-primary transition-colors cursor-pointer'
-        const isActive = active.toLowerCase().includes(routeName.toLowerCase())
-        if (isActive) return 'flex cursor-pointer items-center px-4 -mb-1 border-b-2 link-active'
-        return 'flex items-center px-4 -mb-1 border-b-2 border-transparent hover:text-primary transition-colors cursor-pointer'
-    }
 
-    const isFrench = useMemo(() => locale.toLowerCase().includes('fr'), [locale])
-    const [isActive, setIsAvtice] = useState(false)
+    const lang = useMemo(() => (locale || '').toLowerCase().includes('fr'), [locale]) ? 'fr' : 'en'
+    const s = strings[lang]
 
-    const toggleMenu = () => {
-        setIsAvtice(v => !v)
-    }
-
-
-    // <li className={activeLink('pricing')}>
-    //     <Link href='/pricing' className="flex items-center -mb-1">
-    //         <span className="">
-    //             {isFrench ? 'Coûts' : 'Pricing'}
-    //         </span>
-    //     </Link>
-    // </li>
+    const hiring = false
 
     return (
         <header className="bg-cover bg-coolGray-800 text-coolGray-100  bg-[url(https://source.unsplash.com/UVMPVIRCF5w/1280x)] bg-center relative">
-            <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)]"></div>
+            <div className="absolute inset-0 bg-[rgba(0,0,0,0.75)]"></div>
             <NavBar active={active} locale={locale} />
 
             <section className="bg-coolGray-800 text-coolGray-100 py-16">
                 <div
                     className="container mx-auto flex flex-col items-center px-4 py-16 text-center md:py-32 md:px-10 lg:px-32 xl:max-w-6xl">
-                    <h1 className="text-white text-4xl font-bold leading-none sm:text-5xl z-10">We build
+
+                    {
+                        hiring && (
+                            <div className="inline-block mb-6 px-2 py-1 font-semibold bg-green-100 rounded-full z-10">
+                                <Link href='/careers'>
+                                    <div className="flex flex-wrap items-center -m-1">
+                                        <div className="w-auto p-1"><a className="text-sm" href="" data-config-id="auto-txt-11-1">👋 We are hiring! View open roles</a></div>
+                                        <div className="w-auto p-1">
+                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" data-config-id="auto-svg-3-1">
+                                                <path d="M8.66667 3.41675L12.75 7.50008M12.75 7.50008L8.66667 11.5834M12.75 7.50008L2.25 7.50008" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
+                        )
+                    }
+
+                    <h1 className="text-white text-4xl font-bold leading-none sm:text-5xl z-10"> {s.WeBuild}
                         <span className="text-teal-400">
                             <span> </span>
                             <Typical
-                                steps={['Websites.', 1500, 'Mobile Applications.', 1500, 'the world.', 1500, 'it for you!', 2500]}
+                                steps={
+                                    lang == "en" ?
+                                        ['Websites.', 1500, 'Mobile Applications.', 1500, 'the world.', 1500, 'it with you!', 2500]
+                                        :
+                                        ['des sites internet.', 1500, 'des applications mobiles.', 1500, 'le monde avec vous.', 5500]
+                                }
                                 loop={Infinity}
                                 wrapper="span"
                             />
                         </span>
                     </h1>
                     <p className="px-8 mt-8 mb-12 text-white text-lg z-10">
-                        Nous vous accompagnons dans la digitalisation de votre activité.
+                        {s.subTitle}
+                        <br />
+                        {s.subTitle2}
                     </p>
-                    <div className="flex flex-wrap justify-center z-10">
-                        <button
-                            className="px-8 py-3 m-2 text-lg font-semibold rounded text-white hover:bg-teal-300 bg-teal-400 text-coolGray-900">
-                            Demandez un devis
-                        </button>
-                        <button
-                            className="px-8 py-3 m-2 text-lg border rounded text-white hover:bg-teal-400 hover:border-teal-400 text-coolGray-50 border-coolGray-700">
-                            En savoir plus
-                        </button>
+                    <div className="flex flex-wrap justify-center z-10 space-x-8">
+                        <Link href="/contact">
+                            <button
+                                className="px-8 py-3 m-2 text-lg font-semibold rounded text-white hover:bg-teal-300 bg-teal-400 text-coolGray-900">
+                                {s.invoice}
+                            </button>
+                        </Link>
+                        <Link href="/projects">
+                            <button
+                                className="px-8 py-3 m-2 text-lg border rounded text-white hover:bg-teal-400 hover:border-teal-400 text-coolGray-50 border-coolGray-700">
+                                {s.ourWork}
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </section>
 
-
         </header>
     )
+}
+
+const strings = {
+    'en': {
+        title: "Project - Article",
+        desc: "Bogital Project - Latest Tech news in Africa",
+        WeBuild: "We build",
+        subTitle: "Are you ready to take your business to the next Level?",
+        subTitle2: "Bogital can help with tailored web/mobile/software solutions that meets your specific needs.",
+        invoice: "Request a quote",
+        ourWork: "Our work",
+    },
+    'fr': {
+        title: "Project - Article",
+        desc: "Bogital Project - Latest Tech news in Africa",
+        WeBuild: "Nous concevons ",
+        subTitle: "Nous vous accompagnons dans la digitalisation de votre activité.",
+        subTitle2: "",
+        invoice: "Demandez un devis",
+        ourWork: "Nos projects",
+    }
 }
 
 export default HomeHeader

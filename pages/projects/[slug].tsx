@@ -1,23 +1,13 @@
+import { gql } from "@apollo/client"
 import { motion } from "framer-motion"
 import { GetStaticPaths, GetStaticProps } from "next"
 import { useRouter } from "next/router"
 import { useMemo } from "react"
 import Layout from "../../components/Layout"
-import wordpress from "../../lib/wordpress"
-import { IWordpressArticle } from "../../lib/wordpress/types"
+import { getApolloClient, IProjectDataResponse } from "../../lib/graphql"
 
 interface Props {
-    project: IWordpressArticle
-    // project: {
-    //     title: string,
-    //     desc: string,
-    //     platform: string,
-    //     image: {
-    //         src: string,
-    //         alt: string
-    //     },
-    //     tags: string[]
-    // },
+    project: IProjectDataResponse
     slug: string
 }
 
@@ -37,21 +27,21 @@ const Project: React.FC<Props> = ({ project, slug }) => {
                         {/* <Image src="https://source.unsplash.com/random/420x210" width={420} height={210} className="object-cover" /> */}
                         <img
                             className="object-cover w-full"
-                            src={project._embedded['wp:featuredmedia'][0].source_url}
-                            alt=""
+                            src={project?.featuredImage?.node?.sourceUrl}
+                            alt={project?.featuredImage?.node?.altText}
                         />
                     </motion.div>
 
                     <div className="flex flex-col flex-1 p-4">
                         {/* <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a> */}
 
-                        {/* <motion.div layoutId={`tags-${slug}`} className="flex flex-wrap">
+                        <motion.div layoutId={`tags-${slug}`} className="flex flex-wrap">
                             {
-                                project.tags.map(_tag => <span key={_tag} className="text-xs tracking-wider uppercase bg-teal-800 text-white p-1 md:p-2 m-1 ">{_tag}</span>)
+                                project?.tools?.edges.map(_tag => <span key={_tag.node.id} className="text-xs tracking-wider uppercase bg-teal-800 text-white p-1 md:p-2 m-1 ">{_tag.node.name}</span>)
                             }
-                        </motion.div> */}
+                        </motion.div>
 
-                        <motion.h3 layoutId={`title-${slug}`} className="flex-1 py-2 text-lg font-semibold leading-snug">{project?.title.rendered}</motion.h3>
+                        <motion.h3 layoutId={`title-${slug}`} className="flex-1 py-2 text-lg font-semibold leading-snug">{project?.title}</motion.h3>
 
                     </div>
 
@@ -59,7 +49,7 @@ const Project: React.FC<Props> = ({ project, slug }) => {
 
                 <div className="flex flex-col flex-1 space-y-4 lg:overflow-y-scroll px-4 sm:pr-12">
 
-                    <div className="prose mx-auto" dangerouslySetInnerHTML={{ __html: project.content.rendered }}>
+                    <div className="prose mx-auto" dangerouslySetInnerHTML={{ __html: project?.content || "" }}>
                         {/* <h2 className="text-3xl font-bold text-center">{project?.title.rendered}</h2> */}
                         {/* <p className="font-serif text-sm text-center">Qualisque erroribus usu at, duo te agam soluta mucius.</p> */}
                         {/* <p className=" text-gray-700">
@@ -86,59 +76,94 @@ const strings = {
     'en': {
         title: "Project - Article",
         desc: "Bogital Project - Latest Tech news in Africa",
-        article: {
-            title: "How much will it cost me?",
-            author: "Bogital",
-            image: "https://source.unsplash.com/200x200/?techology?1",
-            date: "June 3, 2020",
-            views: "2.4k",
-            body: "The cost depends on many factors. These factors may include; the number of pages, technologies used in the backend, hosting, private emails, design complexity, client skills etc...Write to us directly from our rapid contact form or call us(696835158) directly."
-        }
     },
     'fr': {
         title: "Project - Article",
         desc: "Bogital Project - Latest Tech news in Africa",
-        article: {
-            title: "How much will it cost me?",
-            author: "Bogital",
-            image: "https://source.unsplash.com/200x200/?techology?1",
-            date: "June 3, 2020",
-            views: "2.4k",
-            body: "The cost depends on many factors. These factors may include; the number of pages, technologies used in the backend, hosting, private emails, design complexity, client skills etc...Write to us directly from our rapid contact form or call us(696835158) directly."
-        }
     }
 }
 
 
 export const getStaticProps: GetStaticProps = async (context) => {
-    wordpress.initialiseWordpress()
-    const projects = await wordpress.getCollection('projects?_embed') as IWordpressArticle[]
-    const data = await wordpress.getCollection(`projects?slug=${context?.params?.slug}&_embed`) as IWordpressArticle[]
-    if (data.length > 0) return {
-        props: {
-            project: data[0],
-            projects,
-            slug: context.params?.slug,
-            revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
-        }
-    }
+    try {
+        const apolloClient = getApolloClient()
+        const data = await apolloClient.query({
+            query: gql`
+        query GetProjectBySlug($slug: String = "") {
+            projectBy(slug: $slug) {
+              projectId
+              slug
+              title
+              featuredImage {
+                node {
+                  altText
+                  title
+                  sourceUrl(size: MEDIUM)
+                }
+              }
+              tools {
+                edges {
+                  node {
+                    id
+                    name
+                  }
+                }
+              }
+              content
+            }
+          }
+    `,
+            variables: {
+                slug: context.params?.slug
+            }
+        })
 
-    return {
-        props: {
-            projects: [],
-            slug: context.params?.slug,
-            revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
+        return {
+            props: {
+                project: data.data.projectBy as IProjectDataResponse,
+                projects: [],
+                slug: context.params?.slug,
+                revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
+            }
+        }
+    } catch (e) {
+        console.error(e)
+        return {
+            props: {
+                project: {},
+                projects: [],
+                slug: context.params?.slug,
+                revalidate: process?.env?.REVALIDATE_TIMEOUT || 0
+            }
         }
     }
 }
 
 
 
-export const getStaticPaths: GetStaticPaths = async () => {
-    wordpress.initialiseWordpress()
-    const projects = await wordpress.getCollection('projects?_embed') as IWordpressArticle[]
+export const getStaticPaths: GetStaticPaths = async (context) => {
+    const apolloClient = getApolloClient()
+    const data = await apolloClient.query({
+        query: gql`
+        query AllProjectSlugs($language: LanguageCodeFilterEnum = ALL) {
+            projects(where: {language: $language}) {
+              edges {
+                node {
+                  projectId
+                  slug
+                  language {
+                    slug
+                  }
+                }
+              }
+            }
+          }
+    `,
+        variables: {}
+    })
+
     return {
-        paths: projects.map($ => ({ 'params': { slug: $.slug } })), //OK
+        paths: (data.data.projects.edges as { node: IProjectDataResponse }[]).map($ => ({ 'params': { slug: $.node.slug }, locale: $.node.language.slug  })), //OK
         fallback: 'blocking'
     }
 
