@@ -68,7 +68,7 @@ const BlogPreview: React.FC<Props> = ({ locale, articles, isPreview }) => {
 
                 {
                     isPreview && (
-                        <Link type="button" href='/blog'
+                        <Link type="button" href='/projects'
                             className=" py-8">
                             <button type="button"
                                 className="p-2 px-8 flex items-center mx-auto text-lg  hover:text-teal-500">
